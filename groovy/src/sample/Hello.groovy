@@ -1,7 +1,12 @@
 package sample
 
 class Hello {
+    String name
+
+    def greet() { "Hello ${name}" }
+
     def static main(String... args) {
-        println "Hello World!"
+        def helloworld = new Hello(name: "Gill")
+        println helloworld.greet()
     }
 }
