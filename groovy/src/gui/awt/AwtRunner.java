@@ -1,12 +1,10 @@
 package gui.awt;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import static java.lang.Thread.sleep;
 
 public class AwtRunner {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         new MyWindow().showWindowDemo();
-        new BufferedReader(new InputStreamReader(System.in)).readLine();
+        sleep(4000);
     }
 }
