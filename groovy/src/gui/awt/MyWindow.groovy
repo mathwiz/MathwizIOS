@@ -14,7 +14,14 @@ class MyWindow {
         mainFrame = new Frame("Java AWT Examples")
         mainFrame .setSize(400, 400)
         mainFrame .setLayout(new GridLayout(3, 1))
-        mainFrame .addWindowListener({ windowEvent -> System.out.println("WindowListener called") } as WindowListener)
+        mainFrame .addWindowListener(new WindowAdapter() {
+            @Override
+            void windowClosing(WindowEvent e) {
+                super.windowClosing(e)
+                mainFrame.dispose()
+                println "windowClosing called"
+            }
+        })
 
         headerLabel = new Label()
         headerLabel .setAlignment(Label.CENTER)
