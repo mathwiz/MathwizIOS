@@ -11,6 +11,9 @@ class Patterns {
                 new MessageAdapterExample() .doIt()
                 new ParameterizedAdapterExample() .doIt()
                 break
+            case "bridge":
+                new BridgeExample1() .doIt()
+                break
             default:
                 println "no pattern: ${args[0]}"
         }
