@@ -17,6 +17,10 @@ abstract class Asset {
         "$name($id)"
     }
 
+    def draw() {
+        println(description())
+    }
+
     def depth() {
         container == null ? 0 : 1 + container.depth()
     }
