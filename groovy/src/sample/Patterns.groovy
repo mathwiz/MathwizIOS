@@ -17,6 +17,9 @@ class Patterns {
             case "bridge":
                 new BridgeExample1() .doIt()
                 break
+            case "composite":
+                new CompositeExample1() .doIt()
+                break
             default:
                 println "no pattern: ${args[0]}"
         }
