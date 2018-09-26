@@ -28,4 +28,8 @@ abstract class Asset {
     def padding() {
         (1..depth()) .inject("") { sum, it -> sum + "    " }
     }
+
+    def containerName() {
+        container == null ? "" : container.name
+    }
 }

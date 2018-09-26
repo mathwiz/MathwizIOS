@@ -1,6 +1,7 @@
 package sample
 
 import pattern.structural.DrawableAsset
+import pattern.structural.EnhancedContainerNameAsset
 import pattern.structural.RoundedValueAsset
 
 class DecoratorExample1 extends CompositeExample1 {
@@ -22,6 +23,15 @@ class DecoratorExample1 extends CompositeExample1 {
         println(better .getClass())
         println(morebetter .getClass())
         morebetter .draw() //does not do rounding. why?
+        println()
+
+        def wrapping = new EnhancedContainerNameAsset(asset: trading)
+        def morewrapping = new RoundedValueAsset(asset: wrapping)
+        def otherway = new EnhancedContainerNameAsset(asset: new RoundedValueAsset(asset: trading))
+        println(trading .containerName() + ". value: " + trading .value())
+        println(wrapping .containerName() + ". value: " + wrapping .value())
+        println(morewrapping .containerName() + ". value: " + morewrapping .value())
+        println(otherway .containerName() + ". value: " + otherway .value())
         println()
     }
 }

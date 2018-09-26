@@ -15,6 +15,10 @@ class AssetDecorator extends Asset {
         asset .draw()
     }
 
+    def containerName() {
+        asset .containerName()
+    }
+
     String toString() {
         println("toString in AssetDecorator " + asset .getClass())
         asset .toString()
