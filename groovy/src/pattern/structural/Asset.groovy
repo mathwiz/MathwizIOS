@@ -14,7 +14,7 @@ abstract class Asset {
     }
 
     def description() {
-        "$name($id)"
+        "$name ($id)"
     }
 
     def draw() {
@@ -26,10 +26,6 @@ abstract class Asset {
     }
 
     def padding() {
-        def pad = ""
-        1 .upto(depth()) {
-            pad += "    "
-        }
-        pad
+        (1..depth()) .inject("") { sum, it -> sum + "    " }
     }
 }

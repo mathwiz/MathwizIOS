@@ -13,10 +13,15 @@ class DecoratorExample1 extends CompositeExample1 {
         println()
 
         def better = new RoundedValueAsset(asset: trading)
-        println(better.description() + ": " + better .value())
+        println(better .getClass())
+        better .draw()
+        println(better .value())
         println()
 
-        def morebetter = new DrawableAsset(asset: better)
+        def morebetter = new DrawableAsset()
+        println(better .getClass())
+        println(morebetter .getClass())
+        morebetter.asset = better
         morebetter .draw() //does not do rounding. why?
         println()
     }

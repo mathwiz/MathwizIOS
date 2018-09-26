@@ -5,5 +5,5 @@ class AssetDecorator extends Asset {
 
     def description() { asset .description() }
 
-    String toString() { asset .toString() }
+    String toString() { println(asset .getClass()); asset .toString() }
 }
