@@ -25,7 +25,7 @@ abstract class Asset {
         container == null ? 0 : 1 + container.depth()
     }
 
-    String padding() {
+    def padding() {
         def pad = ""
         1 .upto(depth()) {
             pad += "    "
