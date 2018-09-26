@@ -13,7 +13,7 @@ class DecoratorExample1 extends CompositeExample1 {
         println()
 
         def better = new RoundedValueAsset(asset: trading)
-        println(better .getClass())
+        println("Class of decorator: " + better .getClass())
         better .draw()
         println(better .value())
         println()
