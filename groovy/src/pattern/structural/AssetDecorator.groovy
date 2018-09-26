@@ -1,14 +1,10 @@
 package pattern.structural
 
-class AssetDecorator {
+class AssetDecorator extends Asset {
     def asset
 
     def value() {
         asset .value()
-    }
-
-    def containsSecurity(aSecurity) {
-        asset .containsSecurity(aSecurity)
     }
 
     def description() {
@@ -17,14 +13,6 @@ class AssetDecorator {
 
     def draw() {
         asset .draw()
-    }
-
-    def depth() {
-        asset .depth()
-    }
-
-    def padding() {
-        asset .padding()
     }
 
     String toString() {

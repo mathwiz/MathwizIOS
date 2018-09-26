@@ -20,6 +20,9 @@ class Patterns {
             case "composite":
                 new CompositeExample1() .doIt()
                 break
+            case "decorator":
+                new DecoratorExample1() .doIt()
+                break
             default:
                 println "no pattern: ${args[0]}"
         }
