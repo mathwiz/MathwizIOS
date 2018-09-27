@@ -20,8 +20,9 @@ class DecoratorExample1 extends CompositeExample1 {
         println()
 
         def morebetter = new DrawableAsset(asset: better)
-        println(better .getClass())
-        println(morebetter .getClass())
+        println("${better .getClass()} contained in ${better.container.getClass()}")
+        println("${morebetter .getClass()} contained in ${morebetter.container.getClass()}")
+        println("Value of doubly wrapped: " + morebetter .value())
         morebetter .draw() //does not do rounding. why?
         println()
 
