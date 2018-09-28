@@ -10,4 +10,3 @@ class FacadeExample1 extends CompositeExample1 {
     }
 
 }
-
