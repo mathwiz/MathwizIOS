@@ -16,6 +16,7 @@ class CompositeExample1 {
     def portfolio = new Portfolio(name: "Yohan's Portfolio") .add(retirement) .add(trading)
 
     def doIt() {
+        println("Composite")
         println(portfolio)
         println()
         println(retirement)

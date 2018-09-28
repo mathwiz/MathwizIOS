@@ -4,6 +4,7 @@ import pattern.structural.MessageAdapter
 
 class MessageAdapterExample extends AdapterExample {
     def doIt() {
+        println("Adapter")
         adapter1 = MessageAdapter.on(one)
         adapter1.setGetter("length")
         adapter2 = MessageAdapter.on(two)

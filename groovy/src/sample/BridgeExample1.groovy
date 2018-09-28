@@ -6,6 +6,7 @@ import pattern.structural.PeekableStack
 
 class BridgeExample1 {
     def doIt() {
+        println("Bridge")
         doWith(new PeekableStack(impl: new ArrayStack()))
         doWith(new PeekableStack(impl: new ListStack()))
     }

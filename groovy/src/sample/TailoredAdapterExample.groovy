@@ -4,6 +4,7 @@ import pattern.structural.StringTailoredAdapter
 
 class TailoredAdapterExample extends AdapterExample {
     def doIt() {
+        println("Adapter")
         adapter1 = new StringTailoredAdapter(string: one)
         adapter2 = new StringTailoredAdapter(string: two)
 

@@ -7,6 +7,7 @@ class SingletonExample1 {
     def two = Singleton.getInstance()
 
     def doIt() {
+        printll("Singleton")
         println "Count: ${one.instanceCount}"
         println "Count: ${two.instanceCount}"
     }

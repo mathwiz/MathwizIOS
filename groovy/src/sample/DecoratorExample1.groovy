@@ -6,6 +6,7 @@ import pattern.structural.RoundedValueAsset
 
 class DecoratorExample1 extends CompositeExample1 {
     def doIt() {
+        println("Decorator")
         portfolio .draw()
         println()
 

@@ -4,6 +4,8 @@ import pattern.structural.ParameterizedAdapter
 
 class ParameterizedAdapterExample extends AdapterExample {
     def doIt() {
+        println("Adapter")
+
         def substringBlock = { it.substring(2, 8) }
 
         adapter1 = ParameterizedAdapter.on(one)

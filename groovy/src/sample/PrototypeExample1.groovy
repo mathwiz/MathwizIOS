@@ -4,6 +4,7 @@ import pattern.creational.PrototypicalPlayer
 
 class PrototypeExample1 {
     def doIt() {
+        println("Prototype")
         def prototype = new PrototypicalPlayer()
         println prototype
 

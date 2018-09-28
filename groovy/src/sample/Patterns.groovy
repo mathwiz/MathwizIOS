@@ -26,6 +26,9 @@ class Patterns {
             case "facade":
                 new FacadeExample1() .doIt()
                 break
+            case "flyweight":
+                new FlyweightExample1() .doIt()
+                break
             default:
                 println "no pattern: ${args[0]}"
         }
