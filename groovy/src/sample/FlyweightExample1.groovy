@@ -9,9 +9,9 @@ class FlyweightExample1 {
         println("Flyweight")
         println("- Player is a Shareable where instances are shared. DB key determines identity.")
         println("- Access must be controlled through the PlayerFactory for Player to be a Shareable.")
-        def player1 = PlayerFactory .getInstance() .fromMap(name: "Tom Brady", pos: "qb", points: 127, salary: 3_000_000)
+        Player player1 = PlayerFactory .getInstance() .fromMap(name: "Tom Brady", pos: "qb", points: 127, salary: 3_000_000)
 
-        def player2 = PlayerFactory .getInstance() .get(player1)
+        Player player2 = PlayerFactory .getInstance() .get(player1)
         player2 .salary = 73_000_000
         player2 .points = 297
 
