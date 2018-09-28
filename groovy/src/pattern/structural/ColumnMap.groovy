@@ -6,7 +6,6 @@ class ColumnMap {
     def static createFrom(obj) {
         def table = obj .getClass() .toString() .split() [1] .split("\\.") .last()
         def properties = namesFrom(obj)
-        println(properties)
         def mappings = properties .collectEntries { [(it): it] }
         new ColumnMap(columnMappings: mappings, tableName: table)
     }
