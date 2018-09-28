@@ -1,5 +1,5 @@
 package pattern.structural
 
 class Persistable {
-    def isPersistent = false
+    def isPersistent = false, key
 }

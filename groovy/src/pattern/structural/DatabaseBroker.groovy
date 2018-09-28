@@ -1,6 +1,15 @@
 package pattern.structural
 
 class DatabaseBroker {
+    def static instance
+
+    def static getInstance() {
+        if (instance == null) {
+            instance = new DatabaseBroker()
+        }
+        instance
+    }
+
     def instanceOf(objClass, key) {
         //def clazz = this.getClass().classLoader.loadClass(objClass, true, false)?.newInstance()
         proxy .get(objClass, key)
