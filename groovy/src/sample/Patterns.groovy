@@ -23,6 +23,9 @@ class Patterns {
             case "decorator":
                 new DecoratorExample1() .doIt()
                 break
+            case "facade":
+                new FacadeExample1() .doIt()
+                break
             default:
                 println "no pattern: ${args[0]}"
         }
