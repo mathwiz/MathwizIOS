@@ -7,4 +7,12 @@ class Player extends Persistable {
     def getKey() {
         name
     }
+
+    boolean equals(player) {
+        player?.key == this.key
+    }
+
+    int hashCode() {
+        this.key .hashCode()
+    }
 }

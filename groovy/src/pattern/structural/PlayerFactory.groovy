@@ -15,8 +15,20 @@ class PlayerFactory {
         def p = new Player(map)
         if (pool[p .key] == null) {
             p .isPersistent = false
+            pool[p .key] = p
+        } else {
+            pool[p .key] = p
+            p .isPersistent = true
         }
-        pool[p .key] = p
         pool[p .key]
+    }
+
+    def get(player) {
+        if (pool[player .key] == null) {
+            player .isPersistent = false
+        } else {
+            player .isPersistent = true
+        }
+        pool[player .key]
     }
 }
