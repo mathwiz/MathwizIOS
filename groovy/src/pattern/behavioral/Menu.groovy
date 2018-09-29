@@ -4,7 +4,7 @@ class Menu {
     private Map<String, MenuItem> items = [:]
     def container
 
-    def add(menuItem) {
+    def add(MenuItem menuItem) {
         items[menuItem.name] = menuItem
         this
     }
