@@ -19,6 +19,7 @@ class Application {
         mainMenu .add(new MenuItem(name: "Copy", command: new CopyCommand(receiver: document, application: this)))
         mainMenu .add(new MenuItem(name: "Paste", command: new PasteCommand(receiver: document, application: this)))
         mainMenu .add(new MenuItem(name: "SelectAll", command: new SelectAllCommand(receiver: document, application: this)))
+        mainMenu .add(new MenuItem(name: "Undo", command: new UndoCommand(receiver: document, application: this)))
         mainMenu .add(new MenuItem(name: "Quit", command: new QuitCommand(receiver: this, application: this)))
     }
 
@@ -40,5 +41,15 @@ class Application {
 
     def quit() {
         shouldQuit = true
+    }
+
+    def undo() {
+        if (historyList .isEmpty()) {
+            println("Nothing to Undo")
+        } else {
+            def previous = historyList .last()
+            historyList = historyList .dropRight(1)
+            previous .unexecute()
+        }
     }
 }

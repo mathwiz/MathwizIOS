@@ -15,6 +15,6 @@ abstract class Command {
     }
 
     def unexecute() {
-        throw new SubclassReponsibility()
+        println("No action taken.")
     }
 }
