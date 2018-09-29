@@ -32,6 +32,9 @@ class Patterns {
             case "proxy":
                 new ProxyExample1() .doIt()
                 break
+            case "chain":
+                new CORExample1() .doIt()
+                break
             default:
                 println "no pattern: ${args[0]}"
         }
