@@ -35,6 +35,9 @@ class Patterns {
             case "chain":
                 new CORExample1() .doIt()
                 break
+            case "command":
+                new CommandExample1() .doIt()
+                break
             default:
                 println "no pattern: ${args[0]}"
         }

@@ -27,7 +27,9 @@ class CORExample1 {
         manager.next = assistant
         assistant.next = no_one
 
+        println("Important decision 1")
         important_decision .handle("You can assist or manage to strategize.")
+        println("Important decision 2")
         important_decision .handle("You can assist or manage.")
 
         def fast_decision = assistant
@@ -35,7 +37,9 @@ class CORExample1 {
         manager.next = ceo
         ceo.next = no_one
 
+        println("Fast decision 1")
         fast_decision .handle("You can assist or manage to strategize.")
+        println("Fast decision 2")
         fast_decision .handle("Do this fast!")
     }
 }
