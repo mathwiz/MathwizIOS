@@ -38,6 +38,9 @@ class Patterns {
             case "command":
                 new CommandExample1() .doIt()
                 break
+            case "interpreter":
+                new InterpreterExample1() .doIt()
+                break
             default:
                 println "no pattern: ${args[0]}"
         }
