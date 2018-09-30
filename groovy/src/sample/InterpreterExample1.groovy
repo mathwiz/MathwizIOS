@@ -24,7 +24,8 @@ class InterpreterExample1 {
         def result = new AttributeNode(attributeName: "id") .evaluateAgainst(new Bond(name: "30 Treasury", id: "CUSIP0030"))
         println(result)
         println(" ** Query")
-        def list = [apple, amazon, google, microsoft, sp500, russell]
+        def full_list = [apple, amazon, google, microsoft, sp500, russell, treasury]
+        def list = full_list .findAll { it.metaClass.hasProperty(it, 'sector')}
 
         def internet = new ValueNode(value: "Internet")
         def tech = new ValueNode(value: "Technology")
