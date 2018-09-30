@@ -1,5 +1,7 @@
 package pattern.behavioral
 
-class EqualsNode extends QueryNode {
-    def leftChild, rightChild
+class EqualsNode extends NonterminalQueryNode {
+    def evaluateAgainst(anObject) {
+        leftChild .evaluateAgainst(anObject) == rightChild .evaluateAgainst(anObject)
+    }
 }
