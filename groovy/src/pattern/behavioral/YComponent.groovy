@@ -1,11 +1,11 @@
 package pattern.behavioral
 
 class YComponent {
-    def changed(event, details) {
+    def action(event, details) {
         LetterRouter .getInstance() .send(this, event, details)
     }
 
-    def addChangeMessage(letter) {
+    def addActionMessage(letter) {
         LetterRouter .getInstance() .addRoute(this, letter)
     }
 }

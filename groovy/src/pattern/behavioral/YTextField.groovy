@@ -4,7 +4,7 @@ class YTextField extends YComponent {
     def text
 
     def setText(str) {
-        changed("changed", [oldValue: text, newValue: str])
+        action("changed", [oldValue: text, newValue: str])
         text = str
     }
 

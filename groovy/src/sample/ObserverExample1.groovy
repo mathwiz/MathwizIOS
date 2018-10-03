@@ -12,15 +12,13 @@ class ObserverExample1 {
         log.append("Starting Observer example")
 
         def field = new YTextField()
-        field.addChangeMessage(
-                new Letter(receiver: alerter,
-                        event: "changed",
-                        block: { receiver, details -> receiver.alert("Text changed from '${details.oldValue}' to '${details.newValue}'") })
+        field.addActionMessage(
+                new Letter(event: "changed",
+                        block: { details -> alerter.alert("Text action from '${details.oldValue}' to '${details.newValue}'") })
         )
-        field.addChangeMessage(
-                new Letter(receiver: log,
-                        event: "changed",
-                        block: { receiver, details -> receiver.append("Text changed from '${details.oldValue}' to '${details.newValue}'") })
+        field.addActionMessage(
+                new Letter(event: "changed",
+                        block: { details -> log.append("Text action from '${details.oldValue}' to '${details.newValue}'") })
         )
 
         field .setText("first input to field")

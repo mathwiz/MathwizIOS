@@ -3,6 +3,12 @@ package sample
 class Patterns {
     def static main(String... args) {
         switch (args[0]) {
+            case "afactory":
+                break
+            case "builder":
+                break
+            case "factorymeth":
+                break
             case "prototype":
                 new PrototypeExample1() .doIt()
                 break
@@ -41,8 +47,22 @@ class Patterns {
             case "interpreter":
                 new InterpreterExample1() .doIt()
                 break
+            case "iterator":
+                break
+            case "mediator":
+                break
+            case "memento":
+                break
             case "observer":
                 new ObserverExample1() .doIt()
+                break
+            case "state":
+                break
+            case "strategy":
+                break
+            case "templatemeth":
+                break
+            case "visitor":
                 break
             default:
                 println "no pattern: ${args[0]}"

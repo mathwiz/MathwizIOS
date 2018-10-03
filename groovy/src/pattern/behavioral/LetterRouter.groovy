@@ -24,9 +24,7 @@ class LetterRouter {
         if (list != null) {
             list .each {
                 if (it .event == event) {
-                    it .block((it .receiver), details)
-                } else {
-                    println("Unknown event '${event}'")
+                    it .block(details)
                 }
             }
         }
