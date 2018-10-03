@@ -7,6 +7,7 @@ import pattern.behavioral.YTextField
 
 class ObserverExample1 {
     def doIt() {
+        println("Observer")
         def alerter = new TextAlert()
         def log = new Log()
         log.append("Starting Observer example")
