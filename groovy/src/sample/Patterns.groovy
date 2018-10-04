@@ -48,6 +48,7 @@ class Patterns {
                 new InterpreterExample1() .doIt()
                 break
             case "iterator":
+                new IteratorExample1() .doIt()
                 break
             case "mediator":
                 new MediatorExample1() .doIt()
