@@ -63,12 +63,16 @@ class Patterns {
                 new ObserverExample1() .doIt()
                 break
             case "state":
+                new StateExample1() .doIt()
                 break
             case "strategy":
+                new StrategyExample1() .doIt()
                 break
             case "templatemeth":
+                new TemplateMethodExample1() .doIt()
                 break
             case "visitor":
+                new VisitorExample1() .doIt()
                 break
             default:
                 println "no pattern: ${args[0]}"
