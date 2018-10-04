@@ -2,12 +2,12 @@ package pattern.creational
 
 class ToyotaBuilder extends CarBuilder {
     def addEngine() {
-        car .engine = new PorscheEngine()
+        car .engine = new ToyotaEngine()
         this
     }
 
     def addchassis() {
-        car .chassis = new PorscheChassis()
+        car .chassis = new ToyotaChassis()
         this
     }
 
