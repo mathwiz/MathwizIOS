@@ -4,23 +4,23 @@ abstract class TCPState {
     def context
 
     def activeOpen(aTCPConnection) {
-        println("Doing activeOpen in ${this}")
+        println("- Doing activeOpen in ${this}")
     }
 
     def passiveOpen(aTCPConnection) {
-        println("Doing passiveOpen in ${this}")
+        println("- Doing passiveOpen in ${this}")
     }
 
     def close(aTCPConnection) {
-        println("Doing close in ${this}")
+        println("- Doing close in ${this}")
     }
 
     def sendThrough(aTCPConnection) {
-        println("Doing sendThrough in ${this}")
+        println("- Doing sendThrough in ${this}")
     }
 
     def transmitThrough(aTCPConnection) {
-        println("Doing transmitThrough in ${this}")
+        println("- Doing transmitThrough in ${this}")
     }
 
     def nextState(stateClass) {

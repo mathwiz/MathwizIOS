@@ -12,8 +12,7 @@ class TCPClosedState extends TCPState {
     }
 
     def close(aTCPConnection) {
-        super.close(aTCPConnection)
-        nextState(TCPListenState)
+        println("close not valid in state ${this}")
     }
 
     def sendThrough(aTCPConnection) {
