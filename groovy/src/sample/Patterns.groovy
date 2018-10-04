@@ -7,6 +7,7 @@ class Patterns {
                 new AbstractFactoryExample1() .doIt()
                 break
             case "builder":
+                new BuilderExample1() .doIt()
                 break
             case "factmeth":
                 break
