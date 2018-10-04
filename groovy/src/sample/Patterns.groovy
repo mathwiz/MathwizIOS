@@ -50,6 +50,7 @@ class Patterns {
             case "iterator":
                 break
             case "mediator":
+                new MediatorExample1() .doIt()
                 break
             case "memento":
                 break
