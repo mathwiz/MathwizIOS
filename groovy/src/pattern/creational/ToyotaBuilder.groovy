@@ -6,7 +6,7 @@ class ToyotaBuilder extends CarBuilder {
         this
     }
 
-    def addchassis() {
+    def addChassis() {
         car .chassis = new ToyotaChassis()
         this
     }

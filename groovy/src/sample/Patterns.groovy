@@ -10,6 +10,7 @@ class Patterns {
                 new BuilderExample1() .doIt()
                 break
             case "factmeth":
+                new FactoryMethodExample1() .doIt()
                 break
             case "prototype":
                 new PrototypeExample1() .doIt()

@@ -9,7 +9,7 @@ abstract class CarBuilder {
         throw new SubclassReponsibility()
     }
 
-    def addchassis() {
+    def addChassis() {
         throw new SubclassReponsibility()
     }
 

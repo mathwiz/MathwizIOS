@@ -1,12 +1,13 @@
 package sample
 
-import pattern.creational.FordBuilder
-import pattern.creational.PorscheBuilder
-import pattern.creational.ToyotaBuilder
+import pattern.creational.FordBuilder2
+import pattern.creational.PorscheBuilder2
+import pattern.creational.ToyotaBuilder2
 
-class BuilderExample1 {
+class FactoryMethodExample1 extends BuilderExample1 {
     def doIt() {
-        println("Builder")
+        println("Factory Method")
+        println("Notice that the Builder subclasses use Factory Method")
         def builder
         println("Building a Ford")
         builder = chooseManufacturer("Ford")
@@ -25,12 +26,11 @@ class BuilderExample1 {
     def chooseManufacturer(make) {
         println("Simulating a user selection of ${make} from a menu")
         if (make == "Ford") {
-            return new FordBuilder()
+            return new FordBuilder2()
         } else if (make == "Toyota") {
-            return new ToyotaBuilder()
+            return new ToyotaBuilder2()
         } else if (make == "Porsche") {
-            return new PorscheBuilder()
+            return new PorscheBuilder2()
         }
     }
-
 }
