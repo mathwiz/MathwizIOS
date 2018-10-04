@@ -53,6 +53,7 @@ class Patterns {
                 new MediatorExample1() .doIt()
                 break
             case "memento":
+                new MementoExample1() .doIt()
                 break
             case "observer":
                 new ObserverExample1() .doIt()
