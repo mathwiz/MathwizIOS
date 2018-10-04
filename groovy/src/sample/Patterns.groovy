@@ -3,11 +3,12 @@ package sample
 class Patterns {
     def static main(String... args) {
         switch (args[0]) {
-            case "afactory":
+            case "absfact":
+                new AbstractFactoryExample1() .doIt()
                 break
             case "builder":
                 break
-            case "factorymeth":
+            case "factmeth":
                 break
             case "prototype":
                 new PrototypeExample1() .doIt()
