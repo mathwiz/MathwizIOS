@@ -18,13 +18,14 @@ class StrategyExample1 {
         println("Simulate changing strategy to Bar")
         visualizer .grapher = bar
         visualizer .graphIt()
-
+        println()
         println("Simulate changing strategy to Line")
         visualizer .grapher = line
         visualizer .graphIt()
-
+        println()
         println("Simulate changing strategy to Pie")
         visualizer .grapher = pie
         visualizer .graphIt()
+        println()
     }
 }

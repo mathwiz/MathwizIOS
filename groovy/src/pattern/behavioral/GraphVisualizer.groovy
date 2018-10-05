@@ -8,10 +8,10 @@ class GraphVisualizer {
     }
 
     def verticalSize() {
-        dimensions.vertical ?: 20
+        dimensions?.vertical ?: 20
     }
 
     def horizontalSize() {
-        dimensions.horizontal ?: 40
+        dimensions?.horizontal ?: 40
     }
 }
