@@ -7,7 +7,7 @@ class LineChartGrapher extends Grapher {
 
     def plotFor(visualizer) {
         println("Line Chart")
-        this .width = visualizer .horizontalSize()
+        this .width = visualizer .horizontalSize() * 1.6
         chartLines(visualizer .data) .each { println(it) }
     }
 }

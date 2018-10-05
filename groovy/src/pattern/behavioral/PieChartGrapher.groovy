@@ -7,7 +7,7 @@ class PieChartGrapher extends Grapher {
 
     def plotFor(visualizer) {
         println("PIe Chart")
-        this .width = visualizer .horizontalSize()
+        this .width = visualizer .horizontalSize() * 0.8
         chartLines(visualizer .data) .each { println(it) }
     }
 }
