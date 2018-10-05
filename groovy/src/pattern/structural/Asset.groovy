@@ -5,6 +5,10 @@ import pattern.SubclassReponsibility
 abstract class Asset {
     def name, id, container
 
+    def acceptVisitor(visitor) {
+        throw new SubclassReponsibility()
+    }
+
     def value() {
         throw new SubclassReponsibility()
     }

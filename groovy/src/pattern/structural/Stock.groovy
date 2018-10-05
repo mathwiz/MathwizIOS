@@ -6,4 +6,8 @@ class Stock extends Security {
     def description() {
         "${super.description()}: ${sector}"
     }
+
+    def acceptVisitor(visitor) {
+        visitor .visitStock(this)
+    }
 }

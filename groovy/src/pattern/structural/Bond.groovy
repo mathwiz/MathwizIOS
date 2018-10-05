@@ -6,4 +6,8 @@ class Bond extends Security {
     def description() {
         "${type} ${super.description()}"
     }
+
+    def acceptVisitor(visitor) {
+        visitor .visitBond(this)
+    }
 }
