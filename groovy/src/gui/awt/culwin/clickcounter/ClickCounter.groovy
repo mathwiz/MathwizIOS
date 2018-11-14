@@ -4,7 +4,7 @@ class ClickCounter {
     final static DEFAULT_MINIMUM = 0
     final static DEFAULT_MAXIMUM = 999
 
-    def minimumCount, maximumCount, clicksCounted
+    def minimumCount, maximumCount, clicksCounted = 0
 
     ClickCounter(min , max) {
         minimumCount = min
@@ -28,7 +28,7 @@ class ClickCounter {
     }
 
     def reset() {
-        clicksCounted = min
+        clicksCounted = minimumCount
     }
 
     def isAtMinimum() {

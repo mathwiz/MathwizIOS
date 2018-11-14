@@ -43,7 +43,7 @@ class ClickCounterTranslation extends Applet implements ActionListener {
             case "reset":
                 theCounter .reset()
                 itsInterface .setMinimumState()
-                theState = COUNTING_STATE
+                theState = MINIMUM_STATE
                 break
             case "decrement":
                 if (theCounter .isAtMaximum()) {
@@ -59,6 +59,8 @@ class ClickCounterTranslation extends Applet implements ActionListener {
                 }
                 break
         }
+
+        itsInterface .setValueDisplay( theCounter .countIsAsString())
     }
 
     public static void main(String[] args) {
