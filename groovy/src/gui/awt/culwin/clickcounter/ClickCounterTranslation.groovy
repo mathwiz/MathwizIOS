@@ -63,7 +63,7 @@ class ClickCounterTranslation extends Applet implements ActionListener {
         itsInterface .setValueDisplay( theCounter .countIsAsString())
     }
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         def frame = new Frame("Click Counter Demo")
         def theInterface = new ClickCounterTranslation()
 
