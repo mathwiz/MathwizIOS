@@ -28,7 +28,7 @@ class CheckExample extends Applet implements ItemListener {
     }
 
     void itemStateChanged(ItemEvent event) {
-        println "Item Selectable is..."
+        print "Item Selectable is... "
         if (event.getItemSelectable() == boldButton) {
             println "Bold button"
         } else if (event.getItemSelectable() == italicButton) {
@@ -39,9 +39,9 @@ class CheckExample extends Applet implements ItemListener {
             println "Smallcaps button"
         }
 
-        println "Item is " + event.getItem()
+        println "Calling getItem() on the event: " + event.getItem()
 
-        println "State change is..."
+        print "State change is... "
 
         if (event.getID() == ItemEvent.ITEM_STATE_CHANGED) {
             println "ID is ITEM_STATE_CHANGED which is " + event.getID()
