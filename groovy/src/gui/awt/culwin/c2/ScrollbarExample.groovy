@@ -16,22 +16,22 @@ class ScrollbarExample extends Applet implements AdjustmentListener {
         hexLabel = new Label()
 
         scroller = new Scrollbar(Scrollbar.HORIZONTAL, 0, 1, 0, 256)
-        scroller .setBlockIncrement(10)
-        scroller .addAdjustmentListener(this)
+        scroller.setBlockIncrement(10)
+        scroller.addAdjustmentListener(this)
 
-        this .setLayout(new GridLayout(3,1,5,5))
+        this.setLayout(new GridLayout(3, 1, 5, 5))
 
-        this .add(decimalLabel)
-        this .add(hexLabel)
-        this .add(scroller)
+        this.add(decimalLabel)
+        this.add(hexLabel)
+        this.add(scroller)
 
-        this .update()
+        this.update()
     }
 
     void adjustmentValueChanged(AdjustmentEvent event) {
         print "Adjustment Value Changed. "
-        println "Value is now: ${event .value}"
-        this .update()
+        println "Value is now: ${event.value}"
+        this.update()
     }
 
     protected void update() {
@@ -39,19 +39,19 @@ class ScrollbarExample extends Applet implements AdjustmentListener {
         String decimalValue = Integer.toString(theValue, 10)
         String hexValue = Integer.toString(theValue, 16)
 
-        decimalLabel .setText("Decimal: ${decimalValue}")
-        hexLabel .setText("Hex: ${hexValue}")
+        decimalLabel.setText("Decimal: ${decimalValue}")
+        hexLabel.setText("Hex: ${hexValue}")
     }
 
     static void main(String[] args) {
         def frame = new Frame("AWT Example")
         def theInterface = new ScrollbarExample()
 
-        theInterface .init()
-        frame .add(theInterface, "Center")
+        theInterface.init()
+        frame.add(theInterface, "Center")
 
-        frame .setVisible(true)
-        frame .setSize(frame .getPreferredSize())
+        frame.setVisible(true)
+        frame.setSize(frame.getPreferredSize())
     }
 
 }
