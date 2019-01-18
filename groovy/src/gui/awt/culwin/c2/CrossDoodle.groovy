@@ -21,7 +21,7 @@ class CrossDoodle extends Doodle {
         context.drawLine(0, intValue(h / 2), w, intValue(h / 2))
     }
 
-    private intValue(x) {
+    private int intValue(x) {
         Math.round(x).intValue()
     }
 }
