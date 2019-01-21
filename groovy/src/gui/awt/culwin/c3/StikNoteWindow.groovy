@@ -21,4 +21,12 @@ class StikNoteWindow {
         applet.add(theMessage, "Center")
         applet.add(buttonPanel, "South")
     }
+
+    String getMessage() {
+        theMessage.getText().trim()
+    }
+
+    void clearMessage() {
+        theMessage.setText("")
+    }
 }
