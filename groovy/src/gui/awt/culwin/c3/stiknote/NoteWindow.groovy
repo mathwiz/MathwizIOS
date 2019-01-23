@@ -1,4 +1,4 @@
-package gui.awt.culwin.c3
+package gui.awt.culwin.c3.stiknote
 
 import gui.awt.culwin.MessageCanvas
 

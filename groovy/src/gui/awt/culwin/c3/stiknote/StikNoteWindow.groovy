@@ -1,4 +1,4 @@
-package gui.awt.culwin.c3
+package gui.awt.culwin.c3.stiknote
 
 import java.awt.BorderLayout
 import java.awt.Button
