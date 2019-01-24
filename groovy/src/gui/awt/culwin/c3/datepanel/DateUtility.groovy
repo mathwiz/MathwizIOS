@@ -25,28 +25,21 @@ class DateUtility {
     /**
      * Use Zeller's congruence to calculate day of week of a date
      * @param thisYear
-     * @param thisMonth
+     * @param thisMonth 1 for January...
      * @param thisDay
-     * @return 0 for Sunday, 1 for Monday, ..., 6 for Saturday
+     * @return 7 for Sunday, 1 for Monday, ..., 6 for Saturday
      */
     static int dayOfWeekIs(int thisYear, int thisMonth, int thisDay) {
-        if (thisMonth < 3) {
-            thisMonth += 10
-        } else {
-            thisMonth -= 2
-        }
-        int thisCentury = thisYear.intdiv(100)
-        thisYear %= 100
-        int zellers = ((26 * thisMonth - 2).intdiv(10) +
-                thisDay + thisYear.intdiv(4) +
-                thisCentury.intdiv(4) -
-                2 * thisCentury) % 7
+        int Q = thisDay
+        int y = thisMonth < 3 ? thisYear - 1 : thisYear
+        int m = thisMonth < 3 ? thisMonth + 12 : thisMonth
+        int M = Math.floorDiv(13 * (m + 1), 5)
+        int K = y % 100
+        int J = Math.floorDiv(y, 100)
 
-        if (zellers < 0) {
-            zellers += 7
-        }
+        int zeller = (Q + M + K + Math.floorDiv(K, 4) + Math.floorDiv(J, 4) + (5 * J)) % 7
 
-        zellers % 7
+        ((zeller + 5) % 7) + 1
     }
 
     static int firstDayOfMonthIs(int thisYear, int thisMonth){
@@ -57,5 +50,6 @@ class DateUtility {
         println dayOfWeekIs(2019, 1, 23) //Wednesday
         println dayOfWeekIs(1968, 11, 10) //Sunday
         println dayOfWeekIs(2018, 2, 2) //Friday
+        println dayOfWeekIs(2018, 12, 25) //Tuesday
     }
 }
