@@ -46,10 +46,25 @@ class DateUtility {
         dayOfWeekIs(thisYear, thisMonth, 1)
     }
 
-    public static void main(String[] args) {
+    static int yearIs() {
+        new GregorianCalendar().get(Calendar.YEAR)
+    }
+
+    static int monthIs() {
+        new GregorianCalendar().get(Calendar.MONTH) + 1
+    }
+
+    static int dayOfMonthIs() {
+        new GregorianCalendar().get(Calendar.DATE)
+    }
+
+
+    static void main(String[] args) {
         println dayOfWeekIs(2019, 1, 23) //Wednesday
         println dayOfWeekIs(1968, 11, 10) //Sunday
         println dayOfWeekIs(2018, 2, 2) //Friday
         println dayOfWeekIs(2018, 12, 25) //Tuesday
+        println firstDayOfMonthIs(2018,2) //Thursday
+        println  "${yearIs()} ${monthIs()} ${dayOfMonthIs()}"
     }
 }
