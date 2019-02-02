@@ -1,5 +1,6 @@
 package gui.awt.culwin.c3.datepanel
 
+import java.awt.AWTEventMulticaster
 import java.awt.BorderLayout
 import java.awt.Choice
 import java.awt.FlowLayout
@@ -25,7 +26,9 @@ class DatePanel extends Panel implements ActionListener, ItemListener {
     }
 
     DatePanel(int year, int month, int day) {
-        Panel topPanel, topLeftPanel, topRightPanel
+        Panel topPanel = new Panel()
+        Panel topLeftPanel = new Panel()
+        Panel topRightPanel = new Panel()
         setLayout(new BorderLayout(4, 4))
         topPanel.setLayout(new GridLayout(1, 2, 4, 4))
         topLeftPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 4, 4))
@@ -68,16 +71,60 @@ class DatePanel extends Panel implements ActionListener, ItemListener {
     }
 
     void setDate(int year, int month, int dayOfMonth) {
+        centuryChoice.select((year / 100) - 20 as Integer)
+        decadeChoice.select((year % 100) / 10 as Integer)
+        yearChoice.select(year % 10)
+        monthChoice.select(month - 1)
+        monthPanel.reConfigure(year, month, dayOfMonth)
+        dateSelected()
+    }
 
+    int yearIs() {
+        Integer.valueOf(centuryChoice.getSelectedItem() +
+                decadeChoice.getSelectedItem() +
+                yearChoice.getSelectedItem())
+    }
+
+    int monthIs() {
+        monthChoice.getSelectedIndex() + 1
+    }
+
+    int dayIs() {
+        monthPanel.dayIs()
     }
 
     @Override
     void actionPerformed(ActionEvent e) {
-
+        dateSelected()
     }
 
     @Override
     void itemStateChanged(ItemEvent e) {
+        monthPanel.reConfigure(yearIs(), monthIs(), dayIs())
+        dateSelected()
+    }
 
+    void setActionCommand(String command) {
+        actionCommand = command
+    }
+
+    String getActionCommand() {
+        actionCommand ?: "Date Panel"
+    }
+
+    void addActionListener(ActionListener listener) {
+        this.listener = AWTEventMulticaster.add(this.listener, listener)
+    }
+
+    void removeActionListener(ActionListener listener) {
+        this.listener = AWTEventMulticaster.remove(this.listener, listener)
+    }
+
+    void dateSelected() {
+        if (this.listener != null) {
+            this.listener.actionPerformed(new ActionEvent(this,
+                    ActionEvent.ACTION_PERFORMED,
+                    getActionCommand()))
+        }
     }
 }

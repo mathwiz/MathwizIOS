@@ -24,7 +24,7 @@ class MonthPanel extends Panel implements ActionListener {
         }
 
         for (int i = 0; i < MAX_BOXES; i++) {
-            dayBoxes[i] new DayBox(i, this)
+            dayBoxes[i] = new DayBox(i, this)
             add(dayBoxes[i])
         }
 

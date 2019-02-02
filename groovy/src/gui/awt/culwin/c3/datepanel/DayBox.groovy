@@ -34,7 +34,7 @@ class DayBox extends Canvas {
     void paint(Graphics context) {
         def location = getSize()
         context.setColor(getBackground())
-        context.fillRect(0, 0, location.width - 1, location.height - 1)
+        context.fillRect(0, 0, location.width - 1 as Integer, location.height - 1 as Integer)
         context.setColor(getForeground())
 
         if (dayNumber != 0) {
@@ -42,13 +42,13 @@ class DayBox extends Canvas {
             def metrics = getFontMetrics(getFont())
             def stringHeight = metrics.getHeight()
             def stringWidth = metrics.stringWidth(numString)
-            context.drawString(numString, (location.width - stringWidth).intdiv(2), stringHeight + 2)
+            context.drawString(numString, (location.width - stringWidth) / 2 as Integer, stringHeight + 2)
             if (isHighlighted) {
-                context.drawRect(2, 2, location.width - 4, location.height - 4)
-                context.drawRect(3, 3, location.width - 6, location.height - 6)
+                context.drawRect(2, 2, location.width - 4 as Integer, location.height - 4 as Integer)
+                context.drawRect(3, 3, location.width - 6 as Integer, location.height - 6 as Integer)
             }
             if (isBordered) {
-                context.drawRect(1, 1, location.width - 2, location.height - 2)
+                context.drawRect(1, 1, location.width - 2 as Integer, location.height - 2 as Integer)
             }
         }
     }
