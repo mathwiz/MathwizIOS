@@ -1,16 +1,9 @@
 package gui.awt.culwin.c4
 
 import gui.awt.culwin.tuttles.Tuttle
-import org.fusesource.jansi.Ansi
 
 import java.applet.Applet
-import java.awt.BorderLayout
-import java.awt.Button
-import java.awt.Color
-import java.awt.Frame
-import java.awt.GridLayout
-import java.awt.Label
-import java.awt.Panel
+import java.awt.*
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 
