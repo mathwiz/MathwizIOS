@@ -31,6 +31,40 @@ class Tuttle extends Canvas {
         myApplet = applet
     }
 
+    void addNotify() {
+        super.addNotify()
+        initializeTuttle()
+        initializeCursor()
+    }
+
+    void initializeTuttle() {
+        screenWidth = getSize().width
+        screenHeight = getSize().height
+        tuttleImage = createImage(screenWidth, screenHeight)
+        tuttleGraphics = tuttleImage.getGraphics()
+        tuttleGraphics.setColor(currentBackground)
+        tuttleGraphics.fillRect(0, 0, screenWidth, screenHeight)
+        tuttleGraphics.setColor(currentForeground)
+        tuttleGraphics.translate(Math.floorDiv(screenWidth, 2), Math.floorDiv(screenHeight, 2))
+        horizontalScale = screenWidth / (SCREEN_STEPS * 2)
+        verticalScale = screenHeight / (SCREEN_STEPS * 2)
+    }
+
+    void initializeCursor() {
+
+    }
+
+    void update(Graphics g) {
+        paint(g)
+    }
+
+    void paint(Graphics g) {
+        g.drawImage(tuttleImage, 0, 0, this)
+        int cursorCenterX = calcCursorPos(screenWidth)
+        int cursorCenterY = calcCursorPos(screenHeight)
+        g.drawImage(theCursor, cursorCenterX, cursorCenterY, this)
+    }
+
     void forward(int steps) {
 
     }
@@ -77,5 +111,10 @@ class Tuttle extends Canvas {
 
     String getDetails() {
         "X: ${xLocation}  Y: ${yLocation}  D: ${direction}  ${penState}"
+    }
+
+    private int calcCursorPos(int screenLocation) {
+        (Math.floorDiv(screenLocation, 2) + screenX) -
+                Math.floorDiv(theCursor.getWidth(this), 2)
     }
 }
