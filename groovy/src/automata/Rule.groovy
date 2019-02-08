@@ -2,9 +2,9 @@ package automata
 
 
 class Rule {
-    List<Element> elements = []
+    List<RuleElement> elements = []
 
-    Rule add(Element element) {
+    Rule add(RuleElement element) {
         elements.add(element)
         this
     }
@@ -15,9 +15,4 @@ class Rule {
         //otherwise return 0
     }
 
-    static class Element {
-        byte left
-        byte center
-        byte right
-    }
 }
