@@ -17,6 +17,7 @@ class Rule {
 
     static class Element {
         byte left
+        byte center
         byte right
     }
 }
