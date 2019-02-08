@@ -32,7 +32,9 @@ class Automaton {
         //recycle over init values
         (0..(row.length - 1)).each {
             row[it] = new Cell(color: pattern[it])
-            if (it == row.length - 1) {
+            if (it == 0) {
+                //no other cells exist yet
+            } else if (it == row.length - 1) {
                 row[it].setRight(row[0])
                 row[0].setLeft(row[it])
             } else {
