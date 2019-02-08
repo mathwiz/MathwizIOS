@@ -4,7 +4,6 @@ class Automaton {
     private static int SIZE = 64
     int size
     Rule rule
-    List<Byte> init
     Cell[] row
 
     Automaton(Rule rule) {
@@ -21,6 +20,10 @@ class Automaton {
         initialize(rule, init, size)
     }
 
+    List<Cell> getCells() {
+        row.toList()
+    }
+
     private void initialize(Rule rule, List<Byte> init, int size) {
         this.size = size
         this.rule = rule
@@ -30,10 +33,12 @@ class Automaton {
     private void makeCells(List<Byte> pattern) {
         row = new Cell[this.size]
         //recycle over init values
+        def colorIt = 0
         (0..(row.length - 1)).each {
-            row[it] = new Cell(color: pattern[it])
+            colorIt = colorIt == pattern.size() ? 0 : colorIt
+            row[it] = new Cell(color: pattern[colorIt++])
             if (it == 0) {
-                //no other cells exist yet
+                //clause needed so no pointers created in this case
             } else if (it == row.length - 1) {
                 row[it].setRight(row[0])
                 row[0].setLeft(row[it])
