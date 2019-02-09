@@ -1,5 +1,7 @@
 package gui.awt.culwin.tuttles
 
+import javax.imageio.ImageIO
+import javax.swing.ImageIcon
 import java.applet.Applet
 import java.awt.Canvas
 import java.awt.Color
@@ -52,25 +54,30 @@ class Tuttle extends Canvas {
     }
 
     void initializeCursor() {
-        MediaTracker tuttleTracker = new MediaTracker(this)
-        theCursor = myApplet.getImage(myApplet.getCodeBase(), "tuttle.gif")
-        tuttleTracker.addImage(theCursor, 0)
-        try {
-            tuttleTracker.waitForID(0)
-        } catch (Exception e) {
-            println e.toString()
-        }
+        def imageFile = this.class.getClassLoader().getResource("gui/awt/culwin/tuttles/turtle.gif")
+        println imageFile
+//        ImageIcon icon = new ImageIcon(imageFile)
+        theCursor = ImageIO.read(imageFile)
 
-        if (theCursor == null ||
-                theCursor.getWidth(this) < 1 ||
-                theCursor.getHeight(this) < 1) {
-            println "Empty image...exiting"
-            System.exit(-1)
-        }
-
-        rotatingCursor = new TuttleCursor(theCursor, this)
-        rotatingCursor.setCursorColor(currentForeground)
-        theCursor = rotatingCursor.rotate(direction)
+//        MediaTracker tuttleTracker = new MediaTracker(this)
+//        theCursor = myApplet.getImage(myApplet.getCodeBase(), "gui/awt/culwin/tuttles/turtle.gif")
+//        tuttleTracker.addImage(theCursor, 0)
+//        try {
+//            tuttleTracker.waitForID(0)
+//        } catch (Exception e) {
+//            println e.toString()
+//        }
+//
+//        if (theCursor == null ||
+//                theCursor.getWidth(this) < 1 ||
+//                theCursor.getHeight(this) < 1) {
+//            println "Empty image...exiting"
+//            System.exit(-1)
+//        }
+//
+//        rotatingCursor = new TuttleCursor(theCursor, this)
+//        rotatingCursor.setCursorColor(currentForeground)
+//        theCursor = rotatingCursor.rotate(direction)
     }
 
     void update(Graphics g) {
@@ -176,7 +183,7 @@ class Tuttle extends Canvas {
     }
 
     String getDetails() {
-        "X: ${xLocation}  Y: ${yLocation * -1}  D: ${direction}  ${penState}" + " " + myApplet.getCodeBase()
+        "X: ${xLocation}  Y: ${yLocation * -1}  D: ${direction}  ${penState}"
     }
 
     private int calcCursorPos(int screenLocation) {
