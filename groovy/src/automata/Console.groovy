@@ -10,7 +10,7 @@ class Console {
 
     void displayRow(Automaton a) {
         a.getCells().each {
-            print "${it.color}|" // displayChar(it.color)
+            print "${it.color}" // displayChar(it.color)
         }
         println ""
     }
@@ -28,9 +28,10 @@ class Console {
 
         Automaton a = new Automaton(rule)
         def rows = (args.length > 0 ? args[0] : 40) as Integer
+        c.displayRow(a)
         (0..rows).each {
+            a.evolve()
             c.displayRow(a)
-//            a.evolve()
         }
     }
 }

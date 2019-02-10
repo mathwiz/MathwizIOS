@@ -14,6 +14,6 @@ class Cell {
     }
 
     String toString() {
-        "${left.color} ${color} ${right.color}"
+        "${left?.color} ${color} ${right?.color}"
     }
 }

@@ -13,7 +13,8 @@ class Rule {
     byte eval(Cell cell) {
         elements.each {
             if (it.isMatch(cell)) {
-                return colorFunction(cell)
+                println "MATCH on ${cell} with rule: ${it}"
+                return 1 as byte // colorFunction(cell)
             }
         }
         0 as byte

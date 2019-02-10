@@ -1,7 +1,7 @@
 package automata
 
 class Automaton {
-    private static int SIZE = 64
+    private static int SIZE = 4
     int size
     Rule rule
     Cell[] row
@@ -31,6 +31,8 @@ class Automaton {
             setNeighbors(it, next)
         }
         row = next
+        println "UPDATED row"
+        println this
         this
     }
 
@@ -49,6 +51,8 @@ class Automaton {
             row[it] = new Cell(color: it)//new Cell(color: pattern[colorIt++])
             setNeighbors(it, row)
         }
+        println "CREATED row"
+        println this
     }
 
     private void setNeighbors(int it, Cell[] cells) {
@@ -58,10 +62,18 @@ class Automaton {
             cells[it].setRight(cells[0])
             cells[0].setLeft(cells[it])
         } else {
-            println "setting neighbors on ${it} " + cells[it]
             cells[it].setLeft(cells[it - 1])
             cells[it - 1].setRight(cells[it])
         }
-        //println "created cell: ${cells[it]}"
+        println "current cell ${it}: ${cells[it].color}. Previous cell: ${cells[it - 1]}"
+    }
+
+    String toString() {
+        StringBuffer sb = new StringBuffer()
+        int i = 0
+        row.each {
+            sb.append("${i++}:${it.left}(${it.color})${it.right}|")
+        }
+        sb.toString()
     }
 }
