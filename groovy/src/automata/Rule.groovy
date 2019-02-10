@@ -3,6 +3,7 @@ package automata
 
 class Rule {
     List<RuleElement> elements = []
+    Closure colorFunction = { cell -> 1 }
 
     Rule add(RuleElement element) {
         elements.add(element)
@@ -10,9 +11,12 @@ class Rule {
     }
 
     byte eval(Cell cell) {
-        //iterate over all rule elements
-        //if there is a match, produce the new color
-        //otherwise return 0
+        elements.each {
+            if (it.isMatch(cell)) {
+                return colorFunction(cell)
+            }
+        }
+        0 as byte
     }
 
 }

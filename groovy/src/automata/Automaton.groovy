@@ -24,6 +24,16 @@ class Automaton {
         row.toList()
     }
 
+    Automaton evolve() {
+        Cell[] next = new Cell[this.size]
+        (0..(next.length - 1)).each {
+            next[it] = row[it].evolve(rule)
+            setNeighbors(it, next)
+        }
+        row = next
+        this
+    }
+
     private void initialize(Rule rule, List<Byte> init, int size) {
         this.size = size
         this.rule = rule
@@ -36,16 +46,22 @@ class Automaton {
         def colorIt = 0
         (0..(row.length - 1)).each {
             colorIt = colorIt == pattern.size() ? 0 : colorIt
-            row[it] = new Cell(color: pattern[colorIt++])
-            if (it == 0) {
-                //clause needed so no pointers created in this case
-            } else if (it == row.length - 1) {
-                row[it].setRight(row[0])
-                row[0].setLeft(row[it])
-            } else {
-                row[it].setLeft(row[it - 1])
-                row[it - 1].setRight(row[it])
-            }
+            row[it] = new Cell(color: it)//new Cell(color: pattern[colorIt++])
+            setNeighbors(it, row)
         }
+    }
+
+    private void setNeighbors(int it, Cell[] cells) {
+        if (it == 0) {
+            //clause needed so no pointers created in this case
+        } else if (it == cells.length - 1) {
+            cells[it].setRight(cells[0])
+            cells[0].setLeft(cells[it])
+        } else {
+            println "setting neighbors on ${it} " + cells[it]
+            cells[it].setLeft(cells[it - 1])
+            cells[it - 1].setRight(cells[it])
+        }
+        //println "created cell: ${cells[it]}"
     }
 }
