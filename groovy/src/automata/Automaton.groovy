@@ -1,7 +1,7 @@
 package automata
 
 class Automaton {
-    private static int SIZE = 4
+    private static int SIZE = 64
     int size
     Rule rule
     Cell[] row
@@ -31,9 +31,6 @@ class Automaton {
             setNeighbors(it, next)
         }
         row = next
-        println "UPDATED row"
-        println this
-        println next
         this
     }
 
@@ -52,8 +49,6 @@ class Automaton {
             row[it] = new Cell(color: pattern[colorIt++])
             setNeighbors(it, row)
         }
-        println "CREATED row"
-        println this
     }
 
     private void setNeighbors(int it, Cell[] cells) {

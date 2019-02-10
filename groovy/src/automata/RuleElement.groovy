@@ -6,7 +6,7 @@ class RuleElement {
     byte right
 
     boolean isMatch(Cell cell) {
-        println "cell: ${cell} vs rule: ${this}"
+//        println "cell: ${cell} vs rule: ${this}"
         cell.getLeft()?.getColor() == this.getLeft() &&
                 cell.getRight()?.getColor() == this.getRight() &&
                 cell.getColor() == this.getCenter()
