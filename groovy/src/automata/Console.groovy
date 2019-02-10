@@ -5,7 +5,7 @@ class Console {
     static final char empty = ' '
 
     String displayChar(val) {
-        (val == 0 ? empty : mark) as String
+        (val == 0 ? empty : val) as String
     }
 
     void displayRow(Automaton a) {
