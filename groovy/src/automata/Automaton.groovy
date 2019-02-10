@@ -33,6 +33,7 @@ class Automaton {
         row = next
         println "UPDATED row"
         println this
+        println next
         this
     }
 
