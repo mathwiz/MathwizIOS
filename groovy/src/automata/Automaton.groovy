@@ -1,7 +1,7 @@
 package automata
 
 class Automaton {
-    private static int SIZE = 64
+    private static int SIZE = 108
     int size
     Rule rule
     Cell[] row
