@@ -15,6 +15,21 @@ class Console {
         println ""
     }
 
+    void displayHeader(Automaton a) {
+        int size = a.getCells().size()
+        def ones = new StringBuffer()
+        def tens = new StringBuffer()
+        for (int it = 0; it < size; it++) {
+            def o = it % 10
+            ones.append(o)
+            def t = Math.floorDiv(it, 10) % 10
+            tens.append(o == 0 ? t : " ")
+        }
+        println tens
+        println ones
+        println ""
+    }
+
     List<Byte> randomPattern(int size) {
         List<Byte> pattern = []
         (0..(size - 1)).each {
@@ -36,6 +51,7 @@ class Console {
         def rule = args.length > 2 ? c.getRule(args[2] as Integer) : Rule.R30
         def random = args.length > 3 ? args[3] != "0" : false
         Automaton a = random ? new Automaton(rule, size, c.randomPattern(size)) : new Automaton(rule, size)
+        c.displayHeader(a)
         c.displayRow(a)
         (0..rows).each {
             a.evolve()

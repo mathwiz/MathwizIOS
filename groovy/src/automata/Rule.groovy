@@ -23,7 +23,7 @@ class Rule {
         for (int it = 0; it < elements.size(); it++) {
             if (elements[it].isMatch(cell)) {
 //                println "MATCH on ${cell} with rule: ${elements[it]}"
-                return 1 as byte // colorFunction(cell)
+                return colorFunction(cell) as byte
             }
         }
         0 as byte
