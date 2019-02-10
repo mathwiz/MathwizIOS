@@ -15,21 +15,27 @@ class Console {
         println ""
     }
 
+    List<Byte> randomPattern(int size) {
+        List<Byte> pattern = []
+        (0..(size - 1)).each {
+            byte val = (Math.random() > 0.5 ? 1 : 0) as byte
+            pattern.add(val)
+        }
+        pattern
+    }
+
+    Rule getRule(int ruleNum) {
+        Rule.R30
+    }
+
     static void main(String[] args) {
         Console c = new Console()
-        Rule rule = new Rule()
-        rule.add(new RuleElement(left: 1, center: 0, right: 0))
-        rule.add(new RuleElement(left: 0, center: 1, right: 1))
-        rule.add(new RuleElement(left: 0, center: 1, right: 0))
-        rule.add(new RuleElement(left: 0, center: 0, right: 1))
-        List<Byte> pattern = []
-        pattern.add(0 as Byte)
-        pattern.add(1 as Byte)
-        pattern.add(1 as Byte)
-        pattern.add(0 as Byte)
 
-        Automaton a = new Automaton(rule)
-        def rows = (args.length > 0 ? args[0] : 40) as Integer
+        def size = (args.length > 0 ? args[0] : 40) as Integer
+        def rows = (args.length > 1 ? args[1] : 40) as Integer
+        def rule = args.length > 2 ? c.getRule(args[2] as Integer) : Rule.R30
+        def random = args.length > 3 ? args[3] != "0" : false
+        Automaton a = random ? new Automaton(rule, size, c.randomPattern(size)) : new Automaton(rule, size)
         c.displayRow(a)
         (0..rows).each {
             a.evolve()

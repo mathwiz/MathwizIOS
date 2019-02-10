@@ -6,17 +6,13 @@ class Automaton {
     Rule rule
     Cell[] row
 
-    Automaton(Rule rule) {
+    Automaton(Rule rule, int size) {
         List<Byte> init = []
-        (0..(SIZE - 1)).each { init.add((it == Math.floor(SIZE / 2) ? 1 : 0) as Byte) }
-        initialize(rule, init, SIZE)
+        (0..(size - 1)).each { init.add((it == Math.floor(size / 2) ? 1 : 0) as Byte) }
+        initialize(rule, init, size)
     }
 
-    Automaton(Rule rule, List<Byte> init) {
-        initialize(rule, init, SIZE)
-    }
-
-    Automaton(Rule rule, List<Byte> init, int size) {
+    Automaton(Rule rule, int size, List<Byte> init) {
         initialize(rule, init, size)
     }
 
