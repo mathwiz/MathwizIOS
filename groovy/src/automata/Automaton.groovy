@@ -48,7 +48,7 @@ class Automaton {
         def colorIt = 0
         (0..(row.length - 1)).each {
             colorIt = colorIt == pattern.size() ? 0 : colorIt
-            row[it] = new Cell(color: it)//new Cell(color: pattern[colorIt++])
+            row[it] = new Cell(color: pattern[colorIt++])
             setNeighbors(it, row)
         }
         println "CREATED row"
@@ -57,22 +57,24 @@ class Automaton {
 
     private void setNeighbors(int it, Cell[] cells) {
         if (it == 0) {
-            //clause needed so no pointers created in this case
+            //clause needed but no pointers created in this case
         } else if (it == cells.length - 1) {
+            cells[it].setLeft(cells[it - 1])
+            cells[it - 1].setRight(cells[it])
             cells[it].setRight(cells[0])
             cells[0].setLeft(cells[it])
         } else {
             cells[it].setLeft(cells[it - 1])
             cells[it - 1].setRight(cells[it])
         }
-        println "current cell ${it}: ${cells[it].color}. Previous cell: ${cells[it - 1]}"
+//        println "current cell ${it}: ${cells[it].color}. Previous cell: ${cells[it - 1]}"
     }
 
     String toString() {
         StringBuffer sb = new StringBuffer()
         int i = 0
         row.each {
-            sb.append("${i++}:${it.left}(${it.color})${it.right}|")
+            sb.append("${i++}:${it.left} (${it.color}) ${it.right}|")
         }
         sb.toString()
     }
