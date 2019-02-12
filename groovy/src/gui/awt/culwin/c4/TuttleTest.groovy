@@ -12,7 +12,7 @@ class TuttleTest extends Applet implements ActionListener {
     Label feedbackLabel
     Panel feedbackPanel, tuttlePanel, buttonPanel
     String[] actions = ["Fwd", "Bwd", "Rtn", "Ltn", "Rst", "Clr", "Cst",
-                        "Fgr", "FgL", "FgB", "BgY", "BgW", "Pdn", "Pup"]
+                        "FgR", "FgL", "FgB", "BgY", "BgW", "Pdn", "Pup"]
     Map<String, Button> buttons = new HashMap<>()
 
     void init() {
@@ -48,15 +48,50 @@ class TuttleTest extends Applet implements ActionListener {
         println "Recieved command ${cmd}"
 
         switch (cmd) {
-            case "Fwd":
+            case actions[0]:
                 theTuttle.forward(25)
                 break
-            case "Bwd":
+            case actions[1]:
                 theTuttle.backward(25)
                 break
-            case "Rtn":
+            case actions[2]:
                 theTuttle.turnRight(30)
                 break
+            case actions[3]:
+                theTuttle.turnLeft(30)
+                break
+            case actions[4]:
+                theTuttle.resetTuttle()
+                break
+            case actions[5]:
+                theTuttle.clearTuttleArea()
+                break
+            case actions[6]:
+                theTuttle.clearAndReset()
+                break
+            case actions[7]:
+                theTuttle.setForeground(Color.RED)
+                break
+            case actions[8]:
+                theTuttle.setForeground(Color.GREEN)
+                break
+            case actions[9]:
+                theTuttle.setForeground(Color.BLUE)
+                break
+            case actions[10]:
+                theTuttle.setBackground(Color.YELLOW)
+                break
+            case actions[11]:
+                theTuttle.setBackground(Color.WHITE)
+                break
+            case actions[12]:
+                theTuttle.setPenDown()
+                break
+            case actions[13]:
+                theTuttle.setPenUp()
+                break
+            default:
+                println "Command not recognized ${cmd}"
         }
 
         feedback()

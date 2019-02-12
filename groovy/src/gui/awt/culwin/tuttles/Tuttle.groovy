@@ -3,6 +3,8 @@ package gui.awt.culwin.tuttles
 import javax.imageio.ImageIO
 import java.applet.Applet
 import java.awt.*
+import java.awt.image.MemoryImageSource
+import java.awt.image.PixelGrabber
 
 class Tuttle extends Canvas {
     private static final int SCREEN_STEPS = 500
@@ -59,9 +61,9 @@ class Tuttle extends Canvas {
             System.exit(-1)
         }
 
-//        rotatingCursor = new TuttleCursor(theCursor, this)
-//        rotatingCursor.setCursorColor(currentForeground)
-//        theCursor = rotatingCursor.rotate(direction)
+        rotatingCursor = new TuttleCursor(theCursor, this)
+        rotatingCursor.setCursorColor(currentForeground)
+        theCursor = rotatingCursor.rotate(direction)
     }
 
     void update(Graphics g) {
@@ -151,7 +153,40 @@ class Tuttle extends Canvas {
     }
 
     void setBackground(Color c) {
+        int[] pixels = new int[screenHeight * screenWidth]
+        final int transparentMask = 0xFF000000
+        final int newColorMask =
+                transparentMask | (c.getRed() << 16) | (c.getGreen() << 8) | c.getBlue()
+        final int oldColorMask =
+                transparentMask | (currentBackground.getRed() << 16) |
+                        (currentBackground.getGreen() << 8) | currentBackground.getBlue()
 
+        Image newImage = createImage(tuttleImage.getSource())
+        PixelGrabber grabber = new PixelGrabber(newImage, 0, 0, screenWidth, screenHeight, pixels, 0, screenWidth)
+
+        try {
+            if (!grabber.grabPixels()) {
+                throw new InterruptedException("Could not grab pixels")
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage())
+            System.exit(-1)
+        }
+
+        for (int y = 0; y < screenHeight; y++) {
+            for (int x = 0; x < screenWidth; x++) {
+                if (pixels[(y * screenWidth) + x] == oldColorMask) {
+                    pixels[(y * screenWidth) + x] = newColorMask
+                }
+            }
+        }
+
+        newImage = createImage(
+                new MemoryImageSource(screenWidth, screenHeight, pixels, 0, screenWidth))
+        tuttleGraphics
+                .drawImage(newImage, -(Math.floorDiv(screenWidth, 2)), -(Math.floorDiv(screenHeight, 2)), this)
+        currentBackground = c
+        repaint()
     }
 
     void setPenUp() {
