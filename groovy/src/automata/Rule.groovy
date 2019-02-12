@@ -12,6 +12,40 @@ class Rule {
                 rule.add(new RuleElement(left: 0, center: 1, right: 0))
                 rule.add(new RuleElement(left: 0, center: 0, right: 1))
                 break
+            case 90:
+                rule = new Rule()
+                rule.add(new RuleElement(left: 1, center: 1, right: 0))
+                rule.add(new RuleElement(left: 1, center: 0, right: 0))
+                rule.add(new RuleElement(left: 0, center: 1, right: 1))
+                rule.add(new RuleElement(left: 0, center: 0, right: 1))
+                break
+            case 110:
+                rule = new Rule()
+                rule.add(new RuleElement(left: 1, center: 1, right: 0))
+                rule.add(new RuleElement(left: 1, center: 0, right: 1))
+                rule.add(new RuleElement(left: 0, center: 1, right: 1))
+                rule.add(new RuleElement(left: 0, center: 1, right: 0))
+                rule.add(new RuleElement(left: 0, center: 0, right: 1))
+                break
+            case 250:
+                rule = new Rule()
+                rule.add(new RuleElement(left: 1, center: 1, right: 1))
+                rule.add(new RuleElement(left: 1, center: 1, right: 0))
+                rule.add(new RuleElement(left: 1, center: 0, right: 1))
+                rule.add(new RuleElement(left: 1, center: 0, right: 0))
+                rule.add(new RuleElement(left: 0, center: 1, right: 1))
+                rule.add(new RuleElement(left: 0, center: 0, right: 1))
+                break
+            case 254:
+                rule = new Rule()
+                rule.add(new RuleElement(left: 1, center: 1, right: 1))
+                rule.add(new RuleElement(left: 1, center: 1, right: 0))
+                rule.add(new RuleElement(left: 1, center: 0, right: 1))
+                rule.add(new RuleElement(left: 1, center: 0, right: 0))
+                rule.add(new RuleElement(left: 0, center: 1, right: 1))
+                rule.add(new RuleElement(left: 0, center: 1, right: 0))
+                rule.add(new RuleElement(left: 0, center: 0, right: 1))
+                break
             default:
                 rule = new Rule()
         }
