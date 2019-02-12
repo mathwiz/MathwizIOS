@@ -2,13 +2,20 @@ package automata
 
 
 class Rule {
-    static Rule R30
-    static {
-        R30 = new Rule()
-        R30.add(new RuleElement(left: 1, center: 0, right: 0))
-        R30.add(new RuleElement(left: 0, center: 1, right: 1))
-        R30.add(new RuleElement(left: 0, center: 1, right: 0))
-        R30.add(new RuleElement(left: 0, center: 0, right: 1))
+    static Rule create(int num) {
+        def rule
+        switch (num) {
+            case 30:
+                rule = new Rule()
+                rule.add(new RuleElement(left: 1, center: 0, right: 0))
+                rule.add(new RuleElement(left: 0, center: 1, right: 1))
+                rule.add(new RuleElement(left: 0, center: 1, right: 0))
+                rule.add(new RuleElement(left: 0, center: 0, right: 1))
+                break
+            default:
+                rule = new Rule()
+        }
+        rule
     }
 
     List<RuleElement> elements = []
@@ -22,7 +29,6 @@ class Rule {
     byte eval(Cell cell) {
         for (int it = 0; it < elements.size(); it++) {
             if (elements[it].isMatch(cell)) {
-//                println "MATCH on ${cell} with rule: ${elements[it]}"
                 return colorFunction(cell) as byte
             }
         }

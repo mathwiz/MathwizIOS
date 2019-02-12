@@ -59,7 +59,6 @@ class Automaton {
             cells[it].setLeft(cells[it - 1])
             cells[it - 1].setRight(cells[it])
         }
-//        println "current cell ${it}: ${cells[it].color}. Previous cell: ${cells[it - 1]}"
     }
 
     String toString() {

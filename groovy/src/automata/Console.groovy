@@ -40,7 +40,7 @@ class Console {
     }
 
     Rule getRule(int ruleNum) {
-        Rule.R30
+        Rule.create(ruleNum)
     }
 
     static void main(String[] args) {
@@ -48,7 +48,7 @@ class Console {
 
         def size = (args.length > 0 ? args[0] : 40) as Integer
         def rows = (args.length > 1 ? args[1] : 40) as Integer
-        def rule = args.length > 2 ? c.getRule(args[2] as Integer) : Rule.R30
+        def rule = args.length > 2 ? c.getRule(args[2] as Integer) : Rule.create(30)
         def random = args.length > 3 ? args[3] != "0" : false
         Automaton a = random ? new Automaton(rule, size, c.randomPattern(size)) : new Automaton(rule, size)
         c.displayHeader(a)
