@@ -51,7 +51,7 @@ class Tuttle extends Canvas {
     }
 
     void initializeCursor() {
-        def imageFile = this.class.getClassLoader().getResource("gui/awt/culwin/tuttles/turtle-sm.gif")
+        def imageFile = this.class.getClassLoader().getResource("gui/awt/culwin/tuttles/block-tuttle.gif")
         theCursor = ImageIO.read(imageFile)
 
         if (theCursor == null ||
@@ -76,7 +76,7 @@ class Tuttle extends Canvas {
                 Math.floorDiv(theCursor.getWidth(this), 2)
         int cursorCenterY = (Math.floorDiv(screenHeight, 2) + screenY) -
                 Math.floorDiv(theCursor.getHeight(this), 2)
-        g.drawImage(theCursor, cursorCenterX + screenX, cursorCenterY + screenY, this)
+        g.drawImage(theCursor, cursorCenterX, cursorCenterY, this)
     }
 
     void forward(int steps) {
