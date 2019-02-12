@@ -12,7 +12,7 @@ class TuttleTest extends Applet implements ActionListener {
     Label feedbackLabel
     Panel feedbackPanel, tuttlePanel, buttonPanel
     String[] actions = ["Fwd", "Bwd", "Rtn", "Ltn", "Rst", "Clr", "Cst",
-                        "FgR", "FgL", "FgB", "BgY", "BgW", "Pdn", "Pup"]
+                        "FgR", "FgG", "FgB", "BgY", "BgW", "Pdn", "Pup"]
     Map<String, Button> buttons = new HashMap<>()
 
     void init() {

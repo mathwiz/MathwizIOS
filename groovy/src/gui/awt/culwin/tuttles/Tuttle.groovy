@@ -46,8 +46,8 @@ class Tuttle extends Canvas {
         tuttleGraphics.fillRect(0, 0, screenWidth, screenHeight)
         tuttleGraphics.setColor(currentForeground)
         tuttleGraphics.translate(Math.floorDiv(screenWidth, 2), Math.floorDiv(screenHeight, 2))
-        horizontalScale = screenWidth / (SCREEN_STEPS * 2)
-        verticalScale = screenHeight / (SCREEN_STEPS * 2)
+        horizontalScale = screenWidth / (SCREEN_STEPS * 2) as double
+        verticalScale = screenHeight / (SCREEN_STEPS * 2) as double
     }
 
     void initializeCursor() {
@@ -72,9 +72,11 @@ class Tuttle extends Canvas {
 
     void paint(Graphics g) {
         g.drawImage(tuttleImage, 0, 0, this)
-        int cursorCenterX = calcCursorPos(screenWidth)
-        int cursorCenterY = calcCursorPos(screenHeight)
-        g.drawImage(theCursor, cursorCenterX, cursorCenterY, this)
+        int cursorCenterX = (Math.floorDiv(screenWidth, 2) + screenX) -
+                Math.floorDiv(theCursor.getWidth(this), 2)
+        int cursorCenterY = (Math.floorDiv(screenHeight, 2) + screenY) -
+                Math.floorDiv(theCursor.getHeight(this), 2)
+        g.drawImage(theCursor, cursorCenterX + screenX, cursorCenterY + screenY, this)
     }
 
     void forward(int steps) {
@@ -203,10 +205,5 @@ class Tuttle extends Canvas {
 
     String getDetails() {
         "X: ${xLocation}  Y: ${yLocation * -1}  D: ${direction}  ${penState}"
-    }
-
-    private int calcCursorPos(int screenLocation) {
-        (Math.floorDiv(screenLocation, 2) + screenX) -
-                Math.floorDiv(theCursor.getWidth(this), 2)
     }
 }
