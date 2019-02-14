@@ -21,7 +21,7 @@ class TuttleButtonDemonstration extends Applet implements ActionListener {
         left.addActionListener(this)
         add(left)
 
-        right = new TuttleButton("turtle-sm.gif", this)
+        right = new TuttleButton("turtle-sm.gif", this, Color.RED)
         right.setActionCommand("Right Button")
         right.addActionListener(this)
         add(right)
