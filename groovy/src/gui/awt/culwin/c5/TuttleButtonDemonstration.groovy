@@ -10,16 +10,18 @@ import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 
 class TuttleButtonDemonstration extends Applet implements ActionListener {
+    TuttleButton left
+    TuttleButton right
 
     void init() {
         setBackground(Color.YELLOW)
 
-        TuttleButton left = new TuttleButton("block-tuttle.gif", this)
+        left = new TuttleButton("turtle-sm.gif", this)
         left.setActionCommand("Left Button")
         left.addActionListener(this)
         add(left)
 
-        TuttleButton right = new TuttleButton("block-tuttle.gif", this)
+        right = new TuttleButton("turtle-sm.gif", this)
         right.setActionCommand("Right Button")
         right.addActionListener(this)
         add(right)

@@ -39,6 +39,7 @@ class TuttleButton extends Canvas {
     }
 
     void addNotify() {
+        super.addNotify()
         def imageFile = this.class.getClassLoader().getResource(imageSource)
         buttonImage = ImageIO.read(imageFile)
 
