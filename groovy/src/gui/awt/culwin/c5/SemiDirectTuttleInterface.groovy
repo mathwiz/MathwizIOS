@@ -2,7 +2,6 @@ package gui.awt.culwin.c5
 
 import gui.awt.culwin.tuttles.TuttleButton
 
-import javax.swing.Action
 import java.applet.Applet
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
@@ -25,7 +24,6 @@ class SemiDirectTuttleInterface {
 
     def tuttleLayout = new GridBagLayout()
     def movementLayout = new GridBagLayout()
-    def constraints = new GridBagConstraints()
 
     SemiDirectTuttleInterface(Applet myApplet) {
         sendToHere = myApplet
@@ -36,16 +34,36 @@ class SemiDirectTuttleInterface {
         penPanel = new Panel()
         movementPanel = new Panel()
 
-        doButtons(movementButtonNames, movementButtons)
-        doButtons(screenButtonNames, screenButtons)
-        doButtons(penButtonNames, penButtons)
-        doButtons(backgroundButtonNames, backgroundButtons)
-        doButtons(foregroundButtonNames, foregroundButtons)
+        doCreatButtons(movementButtonNames, movementButtons)
+        doCreatButtons(screenButtonNames, screenButtons)
+        doCreatButtons(penButtonNames, penButtons)
+        doCreatButtons(backgroundButtonNames, backgroundButtons)
+        doCreatButtons(foregroundButtonNames, foregroundButtons)
 
         movementPanel.setLayout(movementLayout)
+
+        doMovementButton("turnLeft", makeConstraints(0,1,1,2), movementLayout, movementPanel)
+        doMovementButton("goForward", makeConstraints(1,0,1,2), movementLayout, movementPanel)
+        doMovementButton("goBackward", makeConstraints(1,2,1,2), movementLayout, movementPanel)
+        doMovementButton("turnRight", makeConstraints(1,1,1,2), movementLayout, movementPanel)
     }
 
-    private def doButtons(String names, Map holder) {
+    private def doMovementButton(name, constraints, layout, panel) {
+        def btn = movementButtons[name]
+        layout.setConstraints(btn, constraints)
+        panel.add(btn)
+    }
+
+    private def makeConstraints(gridx, gridy, gridWidth, gridHeight) {
+        def constraints = new GridBagConstraints()
+        constraints.gridx = gridx
+        constraints.gridy = gridy
+        constraints.gridwidth = gridWidth
+        constraints.gridheight = gridHeight
+        constraints
+    }
+
+    private def doCreatButtons(String names, Map holder) {
         names.each {
             holder[it] = makeButton(it)
         }
