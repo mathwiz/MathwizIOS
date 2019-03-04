@@ -1,6 +1,6 @@
 package gui.awt.culwin.c5
 
-import gui.awt.culwin.tuttles.TuttleButton
+import gui.awt.culwin.tuttles.Tuttle
 
 import java.applet.Applet
 import java.awt.*
@@ -8,25 +8,87 @@ import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 
 class SemiDirectTuttle extends Applet implements ActionListener {
-    TuttleButton left
-    TuttleButton right
+    final static int STEPS = 25
+    final static int TURN_SIZE = 15
+
+    Tuttle theTuttle
+    Label feedbackLabel = new Label()
+    Panel feedbackPanel = new Panel()
+    Panel tuttlePanel = new Panel()
+    SemiDirectTuttleInterface theInterface
 
     void init() {
-        setBackground(Color.YELLOW)
+        this.setFont(new Font("TimesRoman", Font.PLAIN, 14))
 
-        left = new TuttleButton("turtle-sm.gif", this)
-        left.setActionCommand("Left Button")
-        left.addActionListener(this)
-        add(left)
+        feedbackPanel.add(feedbackLabel)
 
-        right = new TuttleButton("turtle-sm.gif", this, Color.RED)
-        right.setActionCommand("Right Button")
-        right.addActionListener(this)
-        add(right)
+        theTuttle = new Tuttle(this, 500, 500)
+        tuttlePanel.add(theTuttle)
+
+        theInterface = new SemiDirectTuttleInterface(this)
+
+        this.setLayout(new BorderLayout())
+        this.add(feedbackPanel, "North")
+        this.add(tuttlePanel, "Center")
+        this.add(theInterface, "South")
+
+        this.feedback()
+    }
+
+    def feedback() {
+        feedbackLabel.setText(theTuttle.getDetails())
+        feedbackPanel.doLayout()
     }
 
     void actionPerformed(ActionEvent event) {
-        println "${event.actionCommand} pressed."
+        def cmd = event.getActionCommand()
+        println "Command: ${cmd}"
+
+        if (cmd == "goForward") {
+            theTuttle.forward(STEPS)
+        } else if (cmd == "goBackward") {
+            theTuttle.backward(STEPS)
+        } else if (cmd == "turnLeft") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "turnRight") {
+            theTuttle.turnRight(TURN_SIZE)
+        } else if (cmd == "clear") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "reset") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "clearAndReset") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "penUp") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "penDown") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "backgroundRed") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "backgroundBlue") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "backgroundGreen") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "backgroundYellow") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "backgroundWhite") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "backgroundBlack") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "foregroundRed") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "foregroundBlue") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "foregroundGreen") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "foregroundYellow") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "foregroundWhite") {
+            theTuttle.turnLeft(TURN_SIZE)
+        } else if (cmd == "foregroundBlack") {
+            theTuttle.turnLeft(TURN_SIZE)
+        }
+
+        this.feedback()
     }
 
     static void main(String[] args) {
