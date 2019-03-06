@@ -46,7 +46,7 @@ class SemiDirectTuttleInterface extends Panel {
         doMovementPanel("turnLeft", makeConstraints(0, 1, 1, 2), movementLayout, movementPanel)
         doMovementPanel("goForward", makeConstraints(1, 0, 1, 2), movementLayout, movementPanel)
         doMovementPanel("goBackward", makeConstraints(1, 2, 1, 2), movementLayout, movementPanel)
-        doMovementPanel("turnRight", makeConstraints(1, 1, 1, 2), movementLayout, movementPanel)
+        doMovementPanel("turnRight", makeConstraints(2, 1, 1, 2), movementLayout, movementPanel)
 
         doGenericPanel(penButtons, penPanel)
         doGenericPanel(screenButtons, screenPanel)
@@ -57,11 +57,11 @@ class SemiDirectTuttleInterface extends Panel {
         tuttleLayout.setConstraints(backgroundPanel, makeConstraints(0, 1, 12, 1, GridBagConstraints.NORTHEAST))
         tuttleLayout.setConstraints(movementPanel, makeConstraints(12, 0, 9, 2, GridBagConstraints.CENTER))
         tuttleLayout.setConstraints(screenPanel, makeConstraints(21, 0, 6, 1, GridBagConstraints.SOUTHWEST))
-        tuttleLayout.setConstraints(penPanel, makeConstraints(21, 0, 6, 1, GridBagConstraints.SOUTHWEST))
+        tuttleLayout.setConstraints(penPanel, makeConstraints(21, 1, 6, 1, GridBagConstraints.NORTHWEST))
 
-        this.add(movementPanel)
         this.add(foregroundPanel)
         this.add(backgroundPanel)
+        this.add(movementPanel)
         this.add(screenPanel)
         this.add(penPanel)
     }
