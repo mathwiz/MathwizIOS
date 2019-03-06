@@ -53,39 +53,39 @@ class SemiDirectTuttle extends Applet implements ActionListener {
         } else if (cmd == "turnRight") {
             theTuttle.turnRight(TURN_SIZE)
         } else if (cmd == "clear") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.clearTuttleArea()
         } else if (cmd == "reset") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.resetTuttle()
         } else if (cmd == "clearAndReset") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.clearAndReset()
         } else if (cmd == "penUp") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.setPenUp()
         } else if (cmd == "penDown") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.setPenDown()
         } else if (cmd == "backgroundRed") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.setBackground(Color.RED)
         } else if (cmd == "backgroundBlue") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.setBackground(Color.BLUE)
         } else if (cmd == "backgroundGreen") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.setBackground(Color.GREEN)
         } else if (cmd == "backgroundYellow") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.setBackground(Color.YELLOW)
         } else if (cmd == "backgroundWhite") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.setBackground(Color.WHITE)
         } else if (cmd == "backgroundBlack") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.setBackground(Color.BLACK)
         } else if (cmd == "foregroundRed") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.setForeground(Color.RED)
         } else if (cmd == "foregroundBlue") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.setForeground(Color.BLUE)
         } else if (cmd == "foregroundGreen") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.setForeground(Color.GREEN)
         } else if (cmd == "foregroundYellow") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.setForeground(Color.YELLOW)
         } else if (cmd == "foregroundWhite") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.setForeground(Color.WHITE)
         } else if (cmd == "foregroundBlack") {
-            theTuttle.turnLeft(TURN_SIZE)
+            theTuttle.setForeground(Color.BLACK)
         }
 
         this.feedback()

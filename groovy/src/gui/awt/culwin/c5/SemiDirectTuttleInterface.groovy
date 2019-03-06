@@ -17,11 +17,11 @@ class SemiDirectTuttleInterface extends Panel {
     def penButtons = [:]
     def backgroundButtons = [:]
     def foregroundButtons = [:]
-    def movementButtonNames = ["goForward", "goBackward", "turnLeft", "turnRight" ]
-    def screenButtonNames = [ "clear", "reset", "clearAndReset" ]
-    def penButtonNames = [ "penUp", "penDown" ]
-    def backgroundButtonNames = [ "backgroundRed", "backgroundBlue", "backgroundYellow", "backgroundGreen", "backgroundWhite", "backgroundBlack" ]
-    def foregroundButtonNames = [ "foregroundRed", "foregroundBlue", "foregroundYellow", "foregroundGreen", "foregroundWhite", "foregroundBlack" ]
+    def movementButtonNames = ["goForward", "goBackward", "turnLeft", "turnRight"]
+    def screenButtonNames = ["clear", "reset", "clearAndReset"]
+    def penButtonNames = ["penUp", "penDown"]
+    def backgroundButtonNames = ["backgroundRed", "backgroundBlue", "backgroundYellow", "backgroundGreen", "backgroundWhite", "backgroundBlack"]
+    def foregroundButtonNames = ["foregroundRed", "foregroundBlue", "foregroundYellow", "foregroundGreen", "foregroundWhite", "foregroundBlack"]
 
     def tuttleLayout = new GridBagLayout()
     def movementLayout = new GridBagLayout()
@@ -43,21 +43,21 @@ class SemiDirectTuttleInterface extends Panel {
 
         movementPanel.setLayout(movementLayout)
 
-        doMovementPanel("turnLeft", makeConstraints(0,1,1,2), movementLayout, movementPanel)
-        doMovementPanel("goForward", makeConstraints(1,0,1,2), movementLayout, movementPanel)
-        doMovementPanel("goBackward", makeConstraints(1,2,1,2), movementLayout, movementPanel)
-        doMovementPanel("turnRight", makeConstraints(1,1,1,2), movementLayout, movementPanel)
+        doMovementPanel("turnLeft", makeConstraints(0, 1, 1, 2), movementLayout, movementPanel)
+        doMovementPanel("goForward", makeConstraints(1, 0, 1, 2), movementLayout, movementPanel)
+        doMovementPanel("goBackward", makeConstraints(1, 2, 1, 2), movementLayout, movementPanel)
+        doMovementPanel("turnRight", makeConstraints(1, 1, 1, 2), movementLayout, movementPanel)
 
         doGenericPanel(penButtons, penPanel)
         doGenericPanel(screenButtons, screenPanel)
         doGenericPanel(backgroundButtons, backgroundPanel)
         doGenericPanel(foregroundButtons, foregroundPanel)
 
-        tuttleLayout.setConstraints(foregroundPanel, makeConstraints(0,0,12,1, GridBagConstraints.SOUTHEAST))
-        tuttleLayout.setConstraints(backgroundPanel, makeConstraints(0,1,12,1, GridBagConstraints.NORTHEAST))
-        tuttleLayout.setConstraints(movementPanel, makeConstraints(12,0,9,2, GridBagConstraints.CENTER))
-        tuttleLayout.setConstraints(screenPanel, makeConstraints(21,0,6,1, GridBagConstraints.SOUTHWEST))
-        tuttleLayout.setConstraints(penPanel, makeConstraints(21,0,6,1, GridBagConstraints.SOUTHWEST))
+        tuttleLayout.setConstraints(foregroundPanel, makeConstraints(0, 0, 12, 1, GridBagConstraints.SOUTHEAST))
+        tuttleLayout.setConstraints(backgroundPanel, makeConstraints(0, 1, 12, 1, GridBagConstraints.NORTHEAST))
+        tuttleLayout.setConstraints(movementPanel, makeConstraints(12, 0, 9, 2, GridBagConstraints.CENTER))
+        tuttleLayout.setConstraints(screenPanel, makeConstraints(21, 0, 6, 1, GridBagConstraints.SOUTHWEST))
+        tuttleLayout.setConstraints(penPanel, makeConstraints(21, 0, 6, 1, GridBagConstraints.SOUTHWEST))
 
         this.add(movementPanel)
         this.add(foregroundPanel)
@@ -85,11 +85,13 @@ class SemiDirectTuttleInterface extends Panel {
         constraints.gridy = gridy
         constraints.gridwidth = gridWidth
         constraints.gridheight = gridHeight
-        constraints.anchor = anchor
+        if (anchor != null) {
+            constraints.anchor = anchor
+        }
         constraints
     }
 
-    private def doCreatButtons(String names, Map holder) {
+    private def doCreatButtons(List names, Map holder) {
         names.each {
             holder[it] = makeButton(it)
         }
