@@ -58,6 +58,7 @@ class SemiDirectTuttleInterface extends Panel {
         tuttleLayout.setConstraints(movementPanel, makeConstraints(12, 0, 9, 2, GridBagConstraints.CENTER))
         tuttleLayout.setConstraints(screenPanel, makeConstraints(21, 0, 6, 1, GridBagConstraints.SOUTHWEST))
         tuttleLayout.setConstraints(penPanel, makeConstraints(21, 1, 6, 1, GridBagConstraints.NORTHWEST))
+        this.setLayout(tuttleLayout)
 
         this.add(foregroundPanel)
         this.add(backgroundPanel)
