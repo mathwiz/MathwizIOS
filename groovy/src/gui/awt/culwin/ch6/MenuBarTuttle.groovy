@@ -28,7 +28,7 @@ class MenuBarTuttle extends Applet implements ActionListener {
 
         tuttleFrame.setTitle("Menu Bar Tuttle Interface")
         tuttleFrame.setBackground(Color.WHITE)
-        tuttleFrame.setFont(new Font("TimesRoman", Font.PLAIN, 12))
+        tuttleFrame.setFont(new Font("TimesRoman", Font.PLAIN, 16))
 
         feedbackPanel.add(feedbackLabel)
 
@@ -36,14 +36,24 @@ class MenuBarTuttle extends Applet implements ActionListener {
         tuttlePanel.add(theTuttle)
 
         theInterface = new MenuBarTuttleInterface(tuttleFrame, this)
+        initInterface(theInterface)
 
-//        tuttleFrame.setLayout(new BorderLayout())
         tuttleFrame.add(feedbackPanel, "South")
         tuttleFrame.add(tuttlePanel, "Center")
         tuttleFrame.setSize(tuttleFrame.getPreferredSize())
 
         this.feedback()
         tuttleFrame.setVisible(true)
+
+//        helpDialog
+//        exitDialog
+//        versionDialog
+    }
+
+    def initInterface(myInterface) {
+        myInterface.setForegroundCheckmark("blue")
+        myInterface.setBackgroundCheckmark("yellow")
+        myInterface.setPenUpCheckmark(false)
     }
 
     def feedback() {

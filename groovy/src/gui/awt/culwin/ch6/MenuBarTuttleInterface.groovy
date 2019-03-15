@@ -9,14 +9,16 @@ class MenuBarTuttleInterface {
     ActionListener sendToHere
     Frame myFrame
     MenuBar mainMenuBar = new MenuBar()
-    Menu fileMenu = new Menu("File")
-    MenuItem exitButton = new MenuItem("Exit ...")
 
+    def mainMenus = [:]
+    def fileMenus = [:]
     def movementMenus = [:]
     def screenMenus = [:]
     def penMenus = [:]
     def backgroundMenus = [:]
     def foregroundMenus = [:]
+    def mainMenuNames = ["File", "Move", "Turn", "Colors", "Screen", "Help"]
+    def fileCommands = ["Exit ..."]
     def movementCommands = ["goForward", "goBackward", "turnLeft", "turnRight"]
     def screenCommands = ["clear", "reset", "clearAndReset"]
     def penCommands = ["penUp", "penDown"]
@@ -29,27 +31,57 @@ class MenuBarTuttleInterface {
 
         myFrame.setMenuBar(mainMenuBar)
 
-        mainMenuBar.add(fileMenu)
-        fileMenu.add(exitButton)
+        doCreateMenus(mainMenuNames, mainMenus)
+        addSubItems(mainMenuBar, mainMenus)
 
-        exitButton.setActionCommand("exit show")
-        exitButton.addActionListener(sendToHere)
+        doCreateControls(fileCommands, fileMenus)
+        addSubItems(mainMenus["File"], fileMenus)
 
-        doCreatControls(movementCommands, movementMenus)
-        doCreatControls(screenCommands, screenMenus)
-        doCreatControls(penCommands, penMenus)
-        doCreatControls(backgroundCommands, backgroundMenus)
-        doCreatControls(foregroundCommands, foregroundMenus)
+        doCreateControls(movementCommands, movementMenus)
+        doCreateControls(screenCommands, screenMenus)
+        doCreateControls(penCommands, penMenus, true)
+        doCreateControls(backgroundCommands, backgroundMenus, true)
+        doCreateControls(foregroundCommands, foregroundMenus, true)
     }
 
-    private def doCreatControls(List names, Map holder) {
-        names.each {
-            holder[it] = makeButton(it)
+    def setForegroundCheckmark(which) {
+
+    }
+
+    def setBackgroundCheckmark(which) {
+
+    }
+
+    def setPenUpCheckmark(selected) {
+        penMenus["penUp"].setState(selected)
+    }
+
+    def setPenDownCheckmark(selected) {
+        penMenus["penDown"].setState(selected)
+    }
+
+    private def addSubItems(master, subs) {
+        subs.each { k, v ->
+            master.add(v)
         }
     }
 
-    private def makeButton(String name) {
-        def btn = new MenuItem(name)
+    private def doCreateMenus(List names, Map holder, checkbox=false) {
+        names.each {
+            holder[it] = new Menu(it)
+            holder[it].setActionCommand(it)
+            holder[it].addActionListener(sendToHere as ActionListener)
+        }
+    }
+
+    private def doCreateControls(List names, Map holder, checkbox=false) {
+        names.each {
+            holder[it] = makeButton(it, checkbox)
+        }
+    }
+
+    private def makeButton(String name, checkbox=false) {
+        def btn = checkbox ? new CheckboxMenuItem(name) : new MenuItem(name)
         btn.setActionCommand(name)
         btn.addActionListener(sendToHere as ActionListener)
         btn
