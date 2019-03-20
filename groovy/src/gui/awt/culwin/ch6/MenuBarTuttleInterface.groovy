@@ -12,15 +12,14 @@ class MenuBarTuttleInterface {
 
     def mainMenus = [:]
     def fileMenus = [:]
-    def movementMenus = [:]
-    def screenMenus = [:]
-    def penMenus = [:]
+    def moveMenus = [:]
+    def turnMenus = [:]
     def backgroundMenus = [:]
     def foregroundMenus = [:]
     def commandControls = [:]
     def mainMenuNames = ["File", "Move", "Turn", "Colors", "Screen", "Help"]
     def moveCommands = ["5 steps", "10 steps", "25 steps"]
-    def turnCommands = ["turnLeft", "turnRight"]
+    def turnCommands = ["5 degrees", "15 degrees", "45 degrees"]
     def screenCommands = ["clear", "reset", "clearAndReset"]
     def penCommands = ["penUp", "penDown"]
     def backgroundCommands = ["backgroundRed", "backgroundBlue", "backgroundYellow", "backgroundGreen", "backgroundWhite", "backgroundBlack"]
@@ -39,13 +38,19 @@ class MenuBarTuttleInterface {
         doCreateControls(["Exit ..."], "File", fileMenus)
         addSubItems(mainMenus["File"], fileMenus)
 
-        doCreateMenus(["Forward", "Backward"], movementMenus)
-        addSubItems(mainMenus["Move"], movementMenus)
+        doCreateMenus(["Forward", "Backward"], moveMenus)
+        addSubItems(mainMenus["Move"], moveMenus)
         doCreateControls(moveCommands, "Forward", commandControls)
-        addSubItems(movementMenus["Forward"], filterCommandControls("Forward", moveCommands))
+        addSubItems(moveMenus["Forward"], filterControls("Forward", moveCommands))
+        doCreateControls(moveCommands, "Backward", commandControls)
+        addSubItems(moveMenus["Backward"], filterControls("Backward", moveCommands))
 
-
-//        addSubItems(mainMenus["Turn"], movementMenus)
+        doCreateMenus(["TurnRight", "TurnLeft"], turnMenus)
+        addSubItems(mainMenus["Turn"], turnMenus)
+        doCreateControls(turnCommands, "TurnRight", commandControls)
+        addSubItems(turnMenus["TurnRight"], filterControls("TurnRight", turnCommands))
+        doCreateControls(turnCommands, "TurnLeft", commandControls)
+        addSubItems(turnMenus["TurnLeft"], filterControls("TurnLeft", turnCommands))
 //
 //        doCreateControls(screenCommands, screenMenus)
 //        addSubItems(mainMenus["Screen"], fileMenus)
@@ -71,8 +76,8 @@ class MenuBarTuttleInterface {
 //        penMenus["penDown"].setState(selected)
     }
 
-    def filterCommandControls(menu, commands) {
-        commandControls.subMap(commands.collect { menu + " " + it })
+    def filterControls(parentName, names) {
+        commandControls.subMap(names.collect { parentName + " " + it })
     }
 
     private def addSubItems(master, subs) {
@@ -97,7 +102,10 @@ class MenuBarTuttleInterface {
     }
 
     private def makeButton(String name, checkbox=false) {
-        def btn = checkbox ? new CheckboxMenuItem(name) : new MenuItem(name)
+        def tokens = name.split(" ")
+        def label = tokens.tail().join(" ")
+        def btn = checkbox ? new CheckboxMenuItem(label) : new MenuItem(label)
+        println "Created ${btn} with command: ${name}"
         btn.setActionCommand(name)
         btn.addActionListener(sendToHere as ActionListener)
         btn

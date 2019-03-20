@@ -62,10 +62,13 @@ class MenuBarTuttle extends Applet implements ActionListener {
     }
 
     void actionPerformed(ActionEvent event) {
-        def cmd = event.getActionCommand()
+        def input = event.getActionCommand()
+        def tokenizer = new StringTokenizer(input)
+        def cmd = tokenizer.nextToken()
         println "Command: ${cmd}"
 
-        def arg = null
+        def arg = tokenizer.hasMoreTokens() ? tokenizer.nextToken() : null
+        println "Arg 1: ${arg}"
 
         if (cmd == "goForward") {
             theTuttle.forward(STEPS)
@@ -109,10 +112,10 @@ class MenuBarTuttle extends Applet implements ActionListener {
             theTuttle.setForeground(Color.WHITE)
         } else if (cmd == "foregroundBlack") {
             theTuttle.setForeground(Color.BLACK)
-        } else if (cmd == "Exit ...") {
-            arg = "please"
-            if (arg == "show") {
+        } else if (cmd == "File") {
+            if (arg == "Exit") {
                 //todo show exit dialog
+                println "showing exit dialog"
             } else if (arg == "please") {
                 System.exit(0)
             }
