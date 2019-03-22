@@ -67,50 +67,53 @@ class MenuBarTuttle extends Applet implements ActionListener {
         def cmd = tokenizer.nextToken()
         println "Command: ${cmd}"
 
-        def arg = tokenizer.hasMoreTokens() ? tokenizer.nextToken() : null
-        println "Arg 1: ${arg}"
+        def arg1 = tokenizer.hasMoreTokens() ? tokenizer.nextToken() : null
+        println "Arg 1: ${arg1}"
 
-        if (cmd == "goForward") {
-            theTuttle.forward(STEPS)
-        } else if (cmd == "goBackward") {
-            theTuttle.backward(STEPS)
-        } else if (cmd == "turnLeft") {
-            theTuttle.turnLeft(TURN_SIZE)
-        } else if (cmd == "turnRight") {
-            theTuttle.turnRight(TURN_SIZE)
-        } else if (cmd == "clear") {
-            theTuttle.clearTuttleArea()
-        } else if (cmd == "reset") {
-            theTuttle.resetTuttle()
-        } else if (cmd == "clearAndReset") {
+        def arg2 = tokenizer.hasMoreTokens() ? tokenizer.nextToken() : null
+        println "Arg 2: ${arg2}"
+
+        if (cmd == "Forward") {
+            theTuttle.forward(arg1 as Integer)
+        } else if (cmd == "Backward") {
+            theTuttle.backward(arg1 as Integer)
+        } else if (cmd == "Turn" && arg1 == "Left") {
+            theTuttle.turnLeft(arg2 as Integer)
+        } else if (cmd == "Turn" && arg1 == "Right") {
+            theTuttle.turnRight(arg2 as Integer)
+        } else if (cmd == "Screen" && arg1 == "Clear" && arg2 == "and") {
             theTuttle.clearAndReset()
-        } else if (cmd == "penUp") {
+        } else if (cmd == "Screen" && arg1 == "Clear") {
+            theTuttle.clearTuttleArea()
+        } else if (cmd == "Screen" && arg1 == "Reset") {
+            theTuttle.resetTuttle()
+        } else if (cmd == "Screen" && arg1 == "Pen" && arg2 == "Up") {
             theTuttle.setPenUp()
-        } else if (cmd == "penDown") {
+        } else if (cmd == "Screen" && arg1 == "Pen" && arg2 == "Down") {
             theTuttle.setPenDown()
-        } else if (cmd == "backgroundRed") {
+        } else if (cmd == "Background" && arg1 == "Red") {
             theTuttle.setBackground(Color.RED)
-        } else if (cmd == "backgroundBlue") {
+        } else if (cmd == "Background" && arg1 == "Blue") {
             theTuttle.setBackground(Color.BLUE)
-        } else if (cmd == "backgroundGreen") {
+        } else if (cmd == "Background" && arg1 == "Green") {
             theTuttle.setBackground(Color.GREEN)
-        } else if (cmd == "backgroundYellow") {
+        } else if (cmd == "Background" && arg1 == "Yellow") {
             theTuttle.setBackground(Color.YELLOW)
-        } else if (cmd == "backgroundWhite") {
+        } else if (cmd == "Background" && arg1 == "White") {
             theTuttle.setBackground(Color.WHITE)
-        } else if (cmd == "backgroundBlack") {
+        } else if (cmd == "Background" && arg1 == "Black") {
             theTuttle.setBackground(Color.BLACK)
-        } else if (cmd == "foregroundRed") {
+        } else if (cmd == "Foreground" && arg1 == "Red") {
             theTuttle.setForeground(Color.RED)
-        } else if (cmd == "foregroundBlue") {
+        } else if (cmd == "Foreground" && arg1 == "Blue") {
             theTuttle.setForeground(Color.BLUE)
-        } else if (cmd == "foregroundGreen") {
+        } else if (cmd == "Foreground" && arg1 == "Green") {
             theTuttle.setForeground(Color.GREEN)
-        } else if (cmd == "foregroundYellow") {
+        } else if (cmd == "Foreground" && arg1 == "Yellow") {
             theTuttle.setForeground(Color.YELLOW)
-        } else if (cmd == "foregroundWhite") {
+        } else if (cmd == "Foreground" && arg1 == "White") {
             theTuttle.setForeground(Color.WHITE)
-        } else if (cmd == "foregroundBlack") {
+        } else if (cmd == "Foreground" && arg1 == "Black") {
             theTuttle.setForeground(Color.BLACK)
         } else if (cmd == "File") {
             if (arg == "Exit") {

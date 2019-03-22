@@ -14,16 +14,14 @@ class MenuBarTuttleInterface {
     def fileMenus = [:]
     def moveMenus = [:]
     def turnMenus = [:]
-    def backgroundMenus = [:]
-    def foregroundMenus = [:]
+    def colorMenus = [:]
     def commandControls = [:]
     def mainMenuNames = ["File", "Move", "Turn", "Colors", "Screen", "Help"]
-    def moveCommands = ["5 steps", "10 steps", "25 steps"]
-    def turnCommands = ["5 degrees", "15 degrees", "45 degrees"]
-    def screenCommands = ["clear", "reset", "clearAndReset"]
-    def penCommands = ["penUp", "penDown"]
-    def backgroundCommands = ["backgroundRed", "backgroundBlue", "backgroundYellow", "backgroundGreen", "backgroundWhite", "backgroundBlack"]
-    def foregroundCommands = ["foregroundRed", "foregroundBlue", "foregroundYellow", "foregroundGreen", "foregroundWhite", "foregroundBlack"]
+    def moveCommands = ["10 steps", "25 steps", "50 steps", "100 steps"]
+    def turnCommands = ["5 degrees", "15 degrees", "45 degrees", "90 degrees"]
+    def screenCommands = ["Clear", "Reset", "Clear and Reset"]
+    def penCommands = ["Pen Up", "Pen Down"]
+    def colorCommands = ["Red", "Blue", "Yellow", "Green", "White", "Black"]
     def helpCommands = ["Version", "Help"]
 
     MenuBarTuttleInterface(Frame frame, ActionListener listener) {
@@ -45,19 +43,27 @@ class MenuBarTuttleInterface {
         doCreateControls(moveCommands, "Backward", commandControls)
         addSubItems(moveMenus["Backward"], filterControls("Backward", moveCommands))
 
-        doCreateMenus(["TurnRight", "TurnLeft"], turnMenus)
+        doCreateMenus(["Turn Right", "Turn Left"], turnMenus)
         addSubItems(mainMenus["Turn"], turnMenus)
-        doCreateControls(turnCommands, "TurnRight", commandControls)
-        addSubItems(turnMenus["TurnRight"], filterControls("TurnRight", turnCommands))
-        doCreateControls(turnCommands, "TurnLeft", commandControls)
-        addSubItems(turnMenus["TurnLeft"], filterControls("TurnLeft", turnCommands))
-//
-//        doCreateControls(screenCommands, screenMenus)
-//        addSubItems(mainMenus["Screen"], fileMenus)
-//
-//        doCreateControls(penCommands, penMenus, true)
-//        doCreateControls(backgroundCommands, backgroundMenus, true)
-//        doCreateControls(foregroundCommands, foregroundMenus, true)
+        doCreateControls(turnCommands, "Turn Right", commandControls)
+        addSubItems(turnMenus["Turn Right"], filterControls("Turn Right", turnCommands))
+        doCreateControls(turnCommands, "Turn Left", commandControls)
+        addSubItems(turnMenus["Turn Left"], filterControls("Turn Left", turnCommands))
+
+        doCreateMenus(["Foreground", "Background"], colorMenus)
+        addSubItems(mainMenus["Colors"], colorMenus)
+        doCreateControls(colorCommands, "Background", commandControls)
+        addSubItems(colorMenus["Background"], filterControls("Background", colorCommands))
+        doCreateControls(colorCommands, "Foreground", commandControls)
+        addSubItems(colorMenus["Foreground"], filterControls("Foreground", colorCommands))
+
+        doCreateControls(screenCommands, "Screen", commandControls)
+        addSubItems(mainMenus["Screen"], filterControls("Screen", screenCommands[0..1]))
+        mainMenus["Screen"].addSeparator()
+        addSubItems(mainMenus["Screen"], filterControls("Screen", screenCommands[2..2]))
+        mainMenus["Screen"].addSeparator()
+        doCreateControls(penCommands, "Screen", commandControls)
+        addSubItems(mainMenus["Screen"], filterControls("Screen", penCommands))
     }
 
     def setForegroundCheckmark(which) {
