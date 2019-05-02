@@ -46,7 +46,7 @@ class MenuBarTuttle extends Applet implements ActionListener {
         tuttleFrame.setVisible(true)
 
 //        helpDialog
-//        exitDialog
+        exitDialog = new ExitDialog(tuttleFrame, this)
 //        versionDialog
     }
 
@@ -116,10 +116,12 @@ class MenuBarTuttle extends Applet implements ActionListener {
         } else if (cmd == "Foreground" && arg1 == "Black") {
             theTuttle.setForeground(Color.BLACK)
         } else if (cmd == "File") {
-            if (arg == "Exit") {
-                //todo show exit dialog
+            if (arg1 == "Exit") {
                 println "showing exit dialog"
-            } else if (arg == "please") {
+                exitDialog.setVisible(true)
+            }
+        } else if (cmd == "exit") {
+            if (arg1 == "please") {
                 System.exit(0)
             }
         }

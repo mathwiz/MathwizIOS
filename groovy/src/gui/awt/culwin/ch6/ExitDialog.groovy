@@ -30,6 +30,9 @@ class ExitDialog extends Dialog implements ActionListener {
         messageCanvas = new MessageCanvas(("Are you sure\n you want to exit?"))
         messageCanvas.setBackground(Color.WHITE)
 
+        buttonPanel = new Panel()
+        buttonPanel.setBackground(Color.WHITE)
+
         yesButton = new Button("yes")
         yesButton.setActionCommand("yes")
         yesButton.addActionListener(this)
@@ -50,14 +53,20 @@ class ExitDialog extends Dialog implements ActionListener {
         Point parentLoc = parentWindow.getLocationOnScreen()
         Dimension parentSize = parentWindow.getSize()
         if (showIt) {
-            loc.x = parentLoc.x + parentSize.width/2 - this.getSize().width/2
-            loc.y = parentLoc.y + parentSize.height/2 - this.getSize().height/2
+            loc.x = parentLoc.x + parentSize.width / 2 - this.getSize().width / 2
+            loc.y = parentLoc.y + parentSize.height / 2 - this.getSize().height / 2
+            this.setLocation(loc)
         }
         super.setVisible(showIt)
     }
 
     @Override
     void actionPerformed(ActionEvent actionEvent) {
-
+        this.setVisible(false)
+        if (actionEvent.getActionCommand() == "yes") {
+            myListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "exit please"))
+        } else {
+            println "OK not exiting..."
+        }
     }
 }
