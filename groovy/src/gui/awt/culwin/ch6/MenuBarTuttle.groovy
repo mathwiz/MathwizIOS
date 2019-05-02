@@ -8,8 +8,10 @@ import java.applet.Applet
 import java.awt.*
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
+import java.awt.event.WindowEvent
+import java.awt.event.WindowListener
 
-class MenuBarTuttle extends Applet implements ActionListener {
+class MenuBarTuttle extends Applet implements ActionListener, WindowListener {
     final static int STEPS = 25
     final static int TURN_SIZE = 15
 
@@ -140,4 +142,39 @@ class MenuBarTuttle extends Applet implements ActionListener {
         frame.setSize(frame.getPreferredSize())
     }
 
+    @Override
+    void windowOpened(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    void windowClosing(WindowEvent windowEvent) {
+        print "windowClosing"
+        exitDialog.setVisible(true)
+    }
+
+    @Override
+    void windowClosed(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    void windowIconified(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    void windowDeiconified(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    void windowActivated(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    void windowDeactivated(WindowEvent windowEvent) {
+
+    }
 }
