@@ -20,7 +20,7 @@ class ExitDialog extends Dialog implements ActionListener {
     MessageCanvas messageCanvas
     Button yesButton, noButton
 
-    protected ExitDialog(Frame parent, ActionListener listener) {
+    ExitDialog(Frame parent, ActionListener listener) {
         super(parent, "Exit", true)
         this.setFont(parent.getFont())
         this.setBackground(parent.getBackground())
