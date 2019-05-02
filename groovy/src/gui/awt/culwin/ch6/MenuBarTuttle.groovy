@@ -51,8 +51,8 @@ class MenuBarTuttle extends Applet implements ActionListener {
     }
 
     def initInterface(myInterface) {
-        myInterface.setForegroundCheckmark("blue")
-        myInterface.setBackgroundCheckmark("yellow")
+        myInterface.setForegroundCheckmark("Blue")
+        myInterface.setBackgroundCheckmark("Yellow")
         myInterface.setPenUpCheckmark(false)
     }
 
