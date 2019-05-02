@@ -75,11 +75,13 @@ class MenuBarTuttleInterface {
     }
 
     def setPenUpCheckmark(selected) {
-//        commandControls["Screen Pen Up"].setState(selected)
+        def it = filterControls("Screen", ["Pen Up"])
+        println it["Screen Pen Up"]
     }
 
     def setPenDownCheckmark(selected) {
-//        commandControls["Screen Pen Down"].setState(selected)
+        def it = filterControls("Screen", ["Pen Down"])
+        println it["Screen Pen Down"]
     }
 
     def filterControls(parentName, names) {
