@@ -64,6 +64,9 @@ class MenuBarTuttleInterface {
         mainMenus["Screen"].addSeparator()
         doCreateControls(penCommands, "Screen", commandControls)
         addSubItems(mainMenus["Screen"], filterControls("Screen", penCommands))
+
+        doCreateControls(helpCommands, "Help", commandControls)
+        addSubItems(mainMenus["Help"], filterControls("Help", helpCommands))
     }
 
     def setForegroundCheckmark(which) {
