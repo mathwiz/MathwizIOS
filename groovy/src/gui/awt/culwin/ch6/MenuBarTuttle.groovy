@@ -49,7 +49,7 @@ class MenuBarTuttle extends Applet implements ActionListener, WindowListener {
 
         exitDialog = new ExitDialog(tuttleFrame, this)
         versionDialog = new VersionDialog(tuttleFrame, this.getAppletInfo())
-        helpDialog = new HelpDialog(tuttleFrame, this)
+        helpDialog = new HelpDialog(tuttleFrame)
     }
 
     def initInterface(myInterface) {
