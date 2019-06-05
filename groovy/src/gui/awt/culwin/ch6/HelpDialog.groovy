@@ -21,10 +21,12 @@ class HelpDialog extends Dialog implements ActionListener, ItemListener {
             "The dialog asks if you are sure? If you press no\n" +
             "the dialog will disappear. If you press yes the\n" +
             "program will terminate."
-    private static final MOVE_MESSAGE = ""
-    private static final TURN_MESSAGE = ""
-    private static final COLOR_MESSAGE = ""
-    private static final SCREEN_MESSAGE = ""
+    private static final MOVE_MESSAGE = "The Move menu contains options to move the Tuttle\n"
+    private static final TURN_MESSAGE = "The Turn menu contains options to turn the Tuttle\n"
+    private static final COLOR_MESSAGE = "The Color menu contains options to change\n" +
+            "foreground and background color."
+    private static final SCREEN_MESSAGE = "The Screen menu contains options to change\n" +
+            "the state of the pen and to reset the tuttle or clear the drawing."
 
     Panel helpControl
     CheckboxGroup theGroup
@@ -85,16 +87,16 @@ class HelpDialog extends Dialog implements ActionListener, ItemListener {
         helpPanel.add(fileHelpMessage, FILE)
 
         moveHelpMessage = new MessageCanvas(MOVE_MESSAGE)
-        helpPanel.add(moveHelpMessage, FILE)
+        helpPanel.add(moveHelpMessage, MOVE)
 
         turnHelpMessage = new MessageCanvas(TURN_MESSAGE)
-        helpPanel.add(turnHelpMessage, FILE)
+        helpPanel.add(turnHelpMessage, TURN)
 
         colorHelpMessage = new MessageCanvas(COLOR_MESSAGE)
-        helpPanel.add(colorHelpMessage, FILE)
+        helpPanel.add(colorHelpMessage, COLOR)
 
         screenHelpMessage = new MessageCanvas(SCREEN_MESSAGE)
-        helpPanel.add(screenHelpMessage, FILE)
+        helpPanel.add(screenHelpMessage, SCREEN)
 
         buttonPanel = new Panel()
         buttonPanel.setBackground(Color.WHITE)
@@ -104,6 +106,8 @@ class HelpDialog extends Dialog implements ActionListener, ItemListener {
         okButton.addActionListener(this)
         buttonPanel.add(okButton)
 
+        this.add(helpControl, "North")
+        this.add(helpPanel, "Center")
         this.add(buttonPanel, "South")
         this.pack()
     }
@@ -128,6 +132,8 @@ class HelpDialog extends Dialog implements ActionListener, ItemListener {
 
     @Override
     void itemStateChanged(ItemEvent itemEvent) {
-
+        def cmd = itemEvent.getItem() as String
+        println "Help command: ${cmd}"
+        manager.show(helpPanel, cmd)
     }
 }
