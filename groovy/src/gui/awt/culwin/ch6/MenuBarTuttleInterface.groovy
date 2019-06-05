@@ -3,6 +3,7 @@ package gui.awt.culwin.ch6
 
 import java.awt.*
 import java.awt.event.ActionListener
+import java.awt.event.KeyEvent
 import java.util.List
 
 class MenuBarTuttleInterface {
@@ -35,6 +36,8 @@ class MenuBarTuttleInterface {
 
         doCreateControls(["Exit ..."], "File", fileMenus)
         addSubItems(mainMenus["File"], fileMenus)
+        def exitControl = fileMenus["File Exit ..."]
+        exitControl.setShortcut(new MenuShortcut(KeyEvent.VK_E, true))
 
         doCreateMenus(["Forward", "Backward"], moveMenus)
         addSubItems(mainMenus["Move"], moveMenus)
