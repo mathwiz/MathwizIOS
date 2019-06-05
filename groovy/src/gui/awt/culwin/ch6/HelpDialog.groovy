@@ -1,22 +1,14 @@
 package gui.awt.culwin.ch6
 
-import gui.awt.culwin.MessageCanvas
-
-import java.awt.Button
-import java.awt.Dialog
-import java.awt.Dimension
-import java.awt.Frame
-import java.awt.Panel
-import java.awt.Point
-import java.awt.Window
+import java.awt.*
+import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 
-class HelpDialog extends Dialog {
+class HelpDialog extends Dialog implements ActionListener {
     Window parentWindow
     ActionListener myListener
     Panel buttonPanel
-    Button yesButton, noButton
-
+    Button okButton
 
     HelpDialog(Frame frame, ActionListener listener) {
         super(frame, "Help", false)
@@ -34,7 +26,6 @@ class HelpDialog extends Dialog {
         okButton.addActionListener(this)
         buttonPanel.add(okButton)
 
-        this.add(messageCanvas, "Center")
         this.add(buttonPanel, "South")
         this.pack()
     }
@@ -50,5 +41,10 @@ class HelpDialog extends Dialog {
             this.setLocation(loc)
         }
         super.setVisible(showIt)
+    }
+
+    @Override
+    void actionPerformed(ActionEvent actionEvent) {
+        this.setVisible(false)
     }
 }

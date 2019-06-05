@@ -24,7 +24,7 @@ class MenuBarTuttle extends Applet implements ActionListener, WindowListener {
 
     ExitDialog exitDialog
     VersionDialog versionDialog
-    MenuBarTuttleHelpDialog helpDialog
+    HelpDialog helpDialog
 
     void init() {
 
@@ -136,11 +136,9 @@ class MenuBarTuttle extends Applet implements ActionListener, WindowListener {
             if (arg1 == "Version") {
                 println "showing version dialog"
                 versionDialog.setVisible(true)
-            }
-        } else if (cmd == "Help") {
-            if (arg1 == "Help") {
+            } else if (arg1 == "Help") {
                 println "showing help dialog"
-                helpDialog.setVisble(true)
+                helpDialog.setVisible(true)
             }
         }
 
