@@ -47,9 +47,9 @@ class MenuBarTuttle extends Applet implements ActionListener, WindowListener {
         this.feedback()
         tuttleFrame.setVisible(true)
 
-//        helpDialog
         exitDialog = new ExitDialog(tuttleFrame, this)
         versionDialog = new VersionDialog(tuttleFrame, this.getAppletInfo())
+        helpDialog = new HelpDialog(tuttleFrame, this)
     }
 
     def initInterface(myInterface) {
@@ -61,6 +61,12 @@ class MenuBarTuttle extends Applet implements ActionListener, WindowListener {
     def feedback() {
         feedbackLabel.setText(theTuttle.getDetails())
         feedbackPanel.doLayout()
+    }
+
+    @Override
+    String getAppletInfo() {
+        return "MenuBarTuttle\nVersion 2.0\n" +
+                "June 2019"
     }
 
     void actionPerformed(ActionEvent event) {
@@ -125,6 +131,16 @@ class MenuBarTuttle extends Applet implements ActionListener, WindowListener {
         } else if (cmd == "exit") {
             if (arg1 == "please") {
                 System.exit(0)
+            }
+        } else if (cmd == "Help") {
+            if (arg1 == "Version") {
+                println "showing version dialog"
+                versionDialog.setVisible(true)
+            }
+        } else if (cmd == "Help") {
+            if (arg1 == "Help") {
+                println "showing help dialog"
+                helpDialog.setVisble(true)
             }
         }
 
