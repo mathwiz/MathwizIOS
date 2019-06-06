@@ -7,7 +7,7 @@ import java.awt.*
 class TextMenuTuttleInterface extends Panel {
     static final int TOP_LEVEL_MENU = 0
     static final int MOVE_MENU = 1
-    static final int MOVE_FOREWARD_MENU = 2
+    static final int MOVE_FORWARD_MENU = 2
     static final int MOVE_BACKWARD_MENU = 3
     static final int TURN_MENU = 4
     static final int TURN_LEFT_MENU = 5
@@ -60,7 +60,7 @@ class TextMenuTuttleInterface extends Panel {
             case MOVE_BACKWARD_MENU:
                 menuArea.setText(topLevelMenu + moveMenu + moveBackwardsMenu)
                 break
-            case MOVE_FOREWARD_MENU:
+            case MOVE_FORWARD_MENU:
                 menuArea.setText(topLevelMenu + moveMenu + moveForwardsMenu)
                 break
             case TURN_MENU:
