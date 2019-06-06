@@ -15,7 +15,7 @@ class TextMenuTuttle extends Applet implements ActionListener {
     Label feedbackLabel = new Label()
     Panel feedbackPanel = new Panel()
     Panel tuttlePanel = new Panel()
-    TextTuttleInterface theInterface
+    TextMenuTuttleInterface theInterface
 
     void init() {
         this.setFont(new Font("TimesRoman", Font.PLAIN, 14))
@@ -25,7 +25,7 @@ class TextMenuTuttle extends Applet implements ActionListener {
         theTuttle = new TextTuttle(this, 500, 500)
         tuttlePanel.add(theTuttle)
 
-        theInterface = new TextTuttleInterface(this)
+        theInterface = new TextMenuTuttleInterface(this)
 
         this.setLayout(new BorderLayout())
         this.add(feedbackPanel, "North")
