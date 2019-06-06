@@ -96,7 +96,7 @@ class TextMenuTuttleInterface extends Panel {
         }
     }
 
-    int enuStateIs() {
+    int menuStateIs() {
         return menuState
     }
 }
