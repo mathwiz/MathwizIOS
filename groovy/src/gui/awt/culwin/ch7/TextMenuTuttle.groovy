@@ -6,6 +6,7 @@ import java.applet.Applet
 import java.awt.*
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
+import java.security.Key
 
 
 class TextMenuTuttle extends Applet implements KeyListener {
@@ -47,18 +48,17 @@ class TextMenuTuttle extends Applet implements KeyListener {
 
     @Override
     void keyPressed(KeyEvent keyEvent) {
-        char pressed = event.getKeyChar()
-        println "Key pressed: ${pressed}"
     }
 
     @Override
     void keyReleased(KeyEvent keyEvent) {
-
     }
 
     @Override
     void keyTyped(KeyEvent event) {
         char pressed = event.getKeyChar()
+        println "Key typed: ${pressed}"
+
         int newMenu = TextMenuTuttleInterface.TOP_LEVEL_MENU
         int menuState = theInterface.menuStateIs()
 
@@ -87,16 +87,18 @@ class TextMenuTuttle extends Applet implements KeyListener {
         } else if (menuState == TextMenuTuttleInterface.COLOR_MENU) {
             newMenu = colorMenu(pressed)
         } else if (menuState == TextMenuTuttleInterface.FOREGROUND_COLOR_MENU) {
-            newMenu = moveForegroundColorMenu(pressed)
+            newMenu = foregroundColorMenu(pressed)
         } else if (menuState == TextMenuTuttleInterface.BACKGROUND_COLOR_MENU) {
-            newMenu = moveBackgroundColorMenu(pressed)
+            newMenu = backgroundColorMenu(pressed)
         }
 
+        println "New menu is ${newMenu}"
         theInterface.setMenuState(newMenu)
         this.feedback()
     }
 
     private static int topLevelMenu(char key) {
+        println "topLevelMenu ${key}"
         Map<Character, Integer> menus = [
                 'M': TextMenuTuttleInterface.MOVE_MENU,
                 'm': TextMenuTuttleInterface.MOVE_MENU,
@@ -118,13 +120,253 @@ class TextMenuTuttle extends Applet implements KeyListener {
 
     private static int moveMenu(char key) {
         Map<Character, Integer> menus = [
-                KeyEvent.VK_ESCAPE: TextMenuTuttleInterface.TOP_LEVEL_MENU,
+                (KeyEvent.VK_ESCAPE): TextMenuTuttleInterface.TOP_LEVEL_MENU,
                 'F': TextMenuTuttleInterface.MOVE_FORWARD_MENU,
                 'f': TextMenuTuttleInterface.MOVE_FORWARD_MENU,
                 'B': TextMenuTuttleInterface.MOVE_BACKWARD_MENU,
                 'b': TextMenuTuttleInterface.MOVE_BACKWARD_MENU
         ]
         menus[key] ?: TextMenuTuttleInterface.MOVE_MENU
+    }
+
+    int moveForwardMenu(char key) {
+        int newMenuState = TextMenuTuttleInterface.MOVE_FORWARD_MENU
+        switch (key) {
+            case (KeyEvent.VK_ESCAPE):
+                newMenuState = TextMenuTuttleInterface.MOVE_MENU
+                break
+            case '1':
+                theTuttle.doCommand("fd 10")
+                break
+            case '2':
+                theTuttle.doCommand("fd 20")
+                break
+            case '5':
+                theTuttle.doCommand("fd 50")
+                break
+        }
+        newMenuState
+    }
+
+    int moveBackwardMenu(char key) {
+        int newMenuState = TextMenuTuttleInterface.MOVE_BACKWARD_MENU
+        switch (key) {
+            case (KeyEvent.VK_ESCAPE):
+                newMenuState = TextMenuTuttleInterface.MOVE_MENU
+                break
+            case '1':
+                theTuttle.doCommand("bd 10")
+                break
+            case '2':
+                theTuttle.doCommand("bd 20")
+                break
+            case '5':
+                theTuttle.doCommand("bd 50")
+                break
+        }
+        newMenuState
+    }
+
+    private static int turnMenu(char key) {
+        Map<Character, Integer> menus = [
+                (KeyEvent.VK_ESCAPE): TextMenuTuttleInterface.TOP_LEVEL_MENU,
+                'L': TextMenuTuttleInterface.TURN_LEFT_MENU,
+                'l': TextMenuTuttleInterface.TURN_LEFT_MENU,
+                'R': TextMenuTuttleInterface.TURN_RIGHT_MENU,
+                'r': TextMenuTuttleInterface.TURN_RIGHT_MENU
+        ]
+        menus[key] ?: TextMenuTuttleInterface.TURN_MENU
+    }
+
+    int turnLeftMenu(char key) {
+        int newMenuState = TextMenuTuttleInterface.TURN_LEFT_MENU
+        switch (key) {
+            case (KeyEvent.VK_ESCAPE):
+                newMenuState = TextMenuTuttleInterface.TURN_MENU
+                break
+            case '5':
+                theTuttle.doCommand("tl 5")
+                break
+            case '4':
+                theTuttle.doCommand("tl 45")
+                break
+            case '9':
+                theTuttle.doCommand("tl 90")
+                break
+        }
+        newMenuState
+    }
+
+    int turnRightMenu(char key) {
+        int newMenuState = TextMenuTuttleInterface.TURN_RIGHT_MENU
+        switch (key) {
+            case (KeyEvent.VK_ESCAPE):
+                newMenuState = TextMenuTuttleInterface.TURN_MENU
+                break
+            case '5':
+                theTuttle.doCommand("tr 5")
+                break
+            case '4':
+                theTuttle.doCommand("tr 45")
+                break
+            case '9':
+                theTuttle.doCommand("tr 90")
+                break
+        }
+        newMenuState
+    }
+
+    private static int colorMenu(char key) {
+        Map<Character, Integer> menus = [
+                (KeyEvent.VK_ESCAPE): TextMenuTuttleInterface.TOP_LEVEL_MENU,
+                'B': TextMenuTuttleInterface.BACKGROUND_COLOR_MENU,
+                'b': TextMenuTuttleInterface.BACKGROUND_COLOR_MENU,
+                'F': TextMenuTuttleInterface.FOREGROUND_COLOR_MENU,
+                'f': TextMenuTuttleInterface.FOREGROUND_COLOR_MENU
+        ]
+        menus[key] ?: TextMenuTuttleInterface.COLOR_MENU
+    }
+
+    int backgroundColorMenu(char key) {
+        int newMenuState = TextMenuTuttleInterface.BACKGROUND_COLOR_MENU
+        switch (key) {
+            case (KeyEvent.VK_ESCAPE):
+                newMenuState = TextMenuTuttleInterface.COLOR_MENU
+                break
+            case 'K':
+            case 'k':
+                theTuttle.doCommand("bg black")
+                break
+            case 'W':
+            case 'w':
+                theTuttle.doCommand("bg white")
+                break
+            case 'R':
+            case 'r':
+                theTuttle.doCommand("bg red")
+                break
+            case 'G':
+            case 'g':
+                theTuttle.doCommand("bg green")
+                break
+            case 'Y':
+            case 'y':
+                theTuttle.doCommand("bg yellow")
+                break
+            case 'B':
+            case 'b':
+                theTuttle.doCommand("bg blue")
+                break
+        }
+        newMenuState
+    }
+
+    int foregroundColorMenu(char key) {
+        int newMenuState = TextMenuTuttleInterface.FOREGROUND_COLOR_MENU
+        switch (key) {
+            case (KeyEvent.VK_ESCAPE):
+                newMenuState = TextMenuTuttleInterface.COLOR_MENU
+                break
+            case 'K':
+            case 'k':
+                theTuttle.doCommand("fg black")
+                break
+            case 'W':
+            case 'w':
+                theTuttle.doCommand("fg white")
+                break
+            case 'R':
+            case 'r':
+                theTuttle.doCommand("fg red")
+                break
+            case 'G':
+            case 'g':
+                theTuttle.doCommand("fg green")
+                break
+            case 'Y':
+            case 'y':
+                theTuttle.doCommand("fg yellow")
+                break
+            case 'B':
+            case 'b':
+                theTuttle.doCommand("fg blue")
+                break
+        }
+        newMenuState
+    }
+
+    int penMenu(char key) {
+        int newMenuState = TextMenuTuttleInterface.PEN_MENU
+        switch (key) {
+            case (KeyEvent.VK_ESCAPE):
+                newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
+                break
+            case 'U':
+            case 'u':
+                theTuttle.doCommand("pu")
+                break
+            case 'D':
+            case 'd':
+                theTuttle.doCommand("pd")
+                break
+        }
+        newMenuState
+    }
+
+    int screenMenu(char key) {
+        int newMenuState = TextMenuTuttleInterface.SCREEN_MENU
+        switch (key) {
+            case (KeyEvent.VK_ESCAPE):
+                newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
+                break
+            case 'C':
+            case 'c':
+                theTuttle.doCommand("cl")
+                break
+            case 'R':
+            case 'r':
+                theTuttle.doCommand("rs")
+                break
+            case 'A':
+            case 'a':
+                theTuttle.doCommand("cr")
+                break
+        }
+        newMenuState
+    }
+
+    int helpMenu(char key) {
+        int newMenuState = TextMenuTuttleInterface.HELP_MENU
+        switch (key) {
+            case (KeyEvent.VK_ESCAPE):
+                newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
+                break
+            case 'H':
+            case 'h':
+                println "Show Help"
+                break
+            case 'V':
+            case 'v':
+                println "Show Version"
+                break
+        }
+        newMenuState
+    }
+
+    int exitMenu(char key) {
+        int newMenuState = TextMenuTuttleInterface.EXIT_MENU
+        switch (key) {
+            case (KeyEvent.VK_ESCAPE):
+            case 'N':
+            case 'n':
+                newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
+                break
+            case 'Y':
+            case 'y':
+                System.exit(0)
+                break
+        }
+        newMenuState
     }
 
     static void main(String[] args) {

@@ -21,7 +21,7 @@ class TextTuttle extends Tuttle {
 
     private static final String[] commands = [
             "fd", "bd", "tr", "tl",
-            "fg", "bd", "pu", "pd",
+            "fg", "bg", "pu", "pd",
             "cl", "rs", "cr", "exit"
     ]
 

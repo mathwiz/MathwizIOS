@@ -20,20 +20,20 @@ class TextMenuTuttleInterface extends Panel {
     static final int HELP_MENU = 12
     static final int EXIT_MENU = 13
 
-    private static final String topLevelMenu = "Move Turn Colors Pen Screen Help Exit"
-    private static final String moveMenu = "\n\tMove: Forwards Backwards"
-    private static final String moveForwardsMenu = "\n\t\tMove Forwards: 5 10 25"
-    private static final String moveBackwardsMenu = "\n\t\tMove Backwards: 5 10 25"
-    private static final String turnMenu = "\n\tTurn: Left Right"
+    private static final String topLevelMenu = "(M)ove (T)urn (C)olors (P)en (S)creen (H)elp (E)xit"
+    private static final String moveMenu = "\n\tMove: (F)orwards (B)ackwards"
+    private static final String moveForwardsMenu = "\n\t\tMove Forwards: 10 20 50"
+    private static final String moveBackwardsMenu = "\n\t\tMove Backwards: 10 20 50"
+    private static final String turnMenu = "\n\tTurn: (L)eft (R)ight"
     private static final String turnLeftMenu = "\n\t\tTurn Left: 5 45 90"
     private static final String turnRightMenu = "\n\t\tTurn Right: 5 45 90"
-    private static final String colorMenu = "\n\tColors: Foreground Background"
-    private static final String colorForegroundMenu = "\n\t\tColors Foreground: Black White Red Green Yellow Blue"
-    private static final String colorBackgroundMenu = "\n\t\tColors Background: Black White Red Green Yellow Blue"
-    private static final String penMenu = "\n\tPen: Up Down"
-    private static final String screenMenu = "\n\tSCreen: Clear Reset ClearAndReset"
-    private static final String helpMenu = "\n\tHelp; Help Version"
-    private static final String exitMenu = "\n\tExit: Yes No"
+    private static final String colorMenu = "\n\tColors: (F)oreground (B)ackground"
+    private static final String colorForegroundMenu = "\n\t\tColors Foreground: Blac(k) (W)hite (R)ed (G)reen (Y)ellow (B)lue"
+    private static final String colorBackgroundMenu = "\n\t\tColors Background: Blac(k) (W)hite (R)ed (G)reen (Y)ellow (B)lue"
+    private static final String penMenu = "\n\tPen: (U)p (D)own"
+    private static final String screenMenu = "\n\tSCreen: (C)lear (R)eset Clear(A)ndReset"
+    private static final String helpMenu = "\n\tHelp; (H)elp (V)ersion"
+    private static final String exitMenu = "\n\tExit: (Y)es (N)o"
 
     private int menuState = TOP_LEVEL_MENU
 
