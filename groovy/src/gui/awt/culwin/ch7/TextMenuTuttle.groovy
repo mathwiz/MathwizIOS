@@ -7,6 +7,7 @@ import java.awt.*
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 
+
 class TextMenuTuttle extends Applet implements KeyListener {
     final static int STEPS = 25
     final static int TURN_SIZE = 15
@@ -61,51 +62,69 @@ class TextMenuTuttle extends Applet implements KeyListener {
         int newMenu = TextMenuTuttleInterface.TOP_LEVEL_MENU
         int menuState = theInterface.menuStateIs()
 
-        if (menuState == "goForward") {
-            theTuttle.forward(STEPS)
-        } else if (menuState == "goBackward") {
-            theTuttle.backward(STEPS)
-        } else if (menuState == "turnLeft") {
-            theTuttle.turnLeft(TURN_SIZE)
-        } else if (menuState == "turnRight") {
-            theTuttle.turnRight(TURN_SIZE)
-        } else if (menuState == "clear") {
-            theTuttle.clearTuttleArea()
-        } else if (menuState == "reset") {
-            theTuttle.resetTuttle()
-        } else if (menuState == "clearAndReset") {
-            theTuttle.clearAndReset()
-        } else if (menuState == "penUp") {
-            theTuttle.setPenUp()
-        } else if (menuState == "penDown") {
-            theTuttle.setPenDown()
-        } else if (menuState == "backgroundRed") {
-            theTuttle.setBackground(Color.RED)
-        } else if (menuState == "backgroundBlue") {
-            theTuttle.setBackground(Color.BLUE)
-        } else if (menuState == "backgroundGreen") {
-            theTuttle.setBackground(Color.GREEN)
-        } else if (menuState == "backgroundYellow") {
-            theTuttle.setBackground(Color.YELLOW)
-        } else if (menuState == "backgroundWhite") {
-            theTuttle.setBackground(Color.WHITE)
-        } else if (menuState == "backgroundBlack") {
-            theTuttle.setBackground(Color.BLACK)
-        } else if (menuState == "foregroundRed") {
-            theTuttle.setForeground(Color.RED)
-        } else if (menuState == "foregroundBlue") {
-            theTuttle.setForeground(Color.BLUE)
-        } else if (menuState == "foregroundGreen") {
-            theTuttle.setForeground(Color.GREEN)
-        } else if (menuState == "foregroundYellow") {
-            theTuttle.setForeground(Color.YELLOW)
-        } else if (menuState == "foregroundWhite") {
-            theTuttle.setForeground(Color.WHITE)
-        } else if (menuState == "foregroundBlack") {
-            theTuttle.setForeground(Color.BLACK)
+        if (menuState == TextMenuTuttleInterface.TOP_LEVEL_MENU) {
+            newMenu = topLevelMenu(pressed)
+        } else if (menuState == TextMenuTuttleInterface.MOVE_MENU) {
+            newMenu = moveMenu(pressed)
+        } else if (menuState == TextMenuTuttleInterface.MOVE_BACKWARD_MENU) {
+            newMenu = moveBackwardMenu(pressed)
+        } else if (menuState == TextMenuTuttleInterface.MOVE_FORWARD_MENU) {
+            newMenu = moveForwardMenu(pressed)
+        } else if (menuState == TextMenuTuttleInterface.TURN_MENU) {
+            newMenu = turnMenu(pressed)
+        } else if (menuState == TextMenuTuttleInterface.TURN_LEFT_MENU) {
+            newMenu = turnLeftMenu(pressed)
+        } else if (menuState == TextMenuTuttleInterface.TURN_RIGHT_MENU) {
+            newMenu = turnRightMenu(pressed)
+        } else if (menuState == TextMenuTuttleInterface.PEN_MENU) {
+            newMenu = penMenu(pressed)
+        } else if (menuState == TextMenuTuttleInterface.SCREEN_MENU) {
+            newMenu = screenMenu(pressed)
+        } else if (menuState == TextMenuTuttleInterface.HELP_MENU) {
+            newMenu = helpMenu(pressed)
+        } else if (menuState == TextMenuTuttleInterface.EXIT_MENU) {
+            newMenu = exitMenu(pressed)
+        } else if (menuState == TextMenuTuttleInterface.COLOR_MENU) {
+            newMenu = colorMenu(pressed)
+        } else if (menuState == TextMenuTuttleInterface.FOREGROUND_COLOR_MENU) {
+            newMenu = moveForegroundColorMenu(pressed)
+        } else if (menuState == TextMenuTuttleInterface.BACKGROUND_COLOR_MENU) {
+            newMenu = moveBackgroundColorMenu(pressed)
         }
 
+        theInterface.setMenuState(newMenu)
         this.feedback()
+    }
+
+    private static int topLevelMenu(char key) {
+        Map<Character, Integer> menus = [
+                'M': TextMenuTuttleInterface.MOVE_MENU,
+                'm': TextMenuTuttleInterface.MOVE_MENU,
+                'T': TextMenuTuttleInterface.TURN_MENU,
+                't': TextMenuTuttleInterface.TURN_MENU,
+                'C': TextMenuTuttleInterface.COLOR_MENU,
+                'c': TextMenuTuttleInterface.COLOR_MENU,
+                'P': TextMenuTuttleInterface.PEN_MENU,
+                'p': TextMenuTuttleInterface.PEN_MENU,
+                'S': TextMenuTuttleInterface.SCREEN_MENU,
+                's': TextMenuTuttleInterface.SCREEN_MENU,
+                'H': TextMenuTuttleInterface.HELP_MENU,
+                'h': TextMenuTuttleInterface.HELP_MENU,
+                'E': TextMenuTuttleInterface.EXIT_MENU,
+                'e': TextMenuTuttleInterface.EXIT_MENU
+        ]
+        menus[key] ?: TextMenuTuttleInterface.TOP_LEVEL_MENU
+    }
+
+    private static int moveMenu(char key) {
+        Map<Character, Integer> menus = [
+                KeyEvent.VK_ESCAPE: TextMenuTuttleInterface.TOP_LEVEL_MENU,
+                'F': TextMenuTuttleInterface.MOVE_FORWARD_MENU,
+                'f': TextMenuTuttleInterface.MOVE_FORWARD_MENU,
+                'B': TextMenuTuttleInterface.MOVE_BACKWARD_MENU,
+                'b': TextMenuTuttleInterface.MOVE_BACKWARD_MENU
+        ]
+        menus[key] ?: TextMenuTuttleInterface.MOVE_MENU
     }
 
     static void main(String[] args) {
