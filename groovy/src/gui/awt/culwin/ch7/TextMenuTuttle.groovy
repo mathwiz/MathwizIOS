@@ -6,13 +6,8 @@ import java.applet.Applet
 import java.awt.*
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
-import java.security.Key
-
 
 class TextMenuTuttle extends Applet implements KeyListener {
-    final static int STEPS = 25
-    final static int TURN_SIZE = 15
-
     TextTuttle theTuttle
     Label feedbackLabel = new Label()
     Panel feedbackPanel = new Panel()
@@ -99,7 +94,6 @@ class TextMenuTuttle extends Applet implements KeyListener {
 
     private static int topLevelMenu(char c) {
         char key = Character.toLowerCase(c)
-        println "topLevelMenu ${key}"
         int newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
         switch (key) {
             case 'm':
@@ -132,6 +126,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
         int newMenuState = TextMenuTuttleInterface.MOVE_MENU
         switch (key) {
             case (KeyEvent.VK_ESCAPE):
+            case '~':
                 newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
                 break
             case 'f':
@@ -147,6 +142,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
         int newMenuState = TextMenuTuttleInterface.MOVE_FORWARD_MENU
         switch (key) {
             case (KeyEvent.VK_ESCAPE):
+            case '~':
                 newMenuState = TextMenuTuttleInterface.MOVE_MENU
                 break
             case '1':
@@ -159,6 +155,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
                 theTuttle.doCommand("fd 50")
                 break
         }
+        this.feedback()
         newMenuState
     }
 
@@ -166,6 +163,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
         int newMenuState = TextMenuTuttleInterface.MOVE_BACKWARD_MENU
         switch (key) {
             case (KeyEvent.VK_ESCAPE):
+            case '~':
                 newMenuState = TextMenuTuttleInterface.MOVE_MENU
                 break
             case '1':
@@ -178,6 +176,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
                 theTuttle.doCommand("bd 50")
                 break
         }
+        this.feedback()
         newMenuState
     }
 
@@ -186,6 +185,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
         int newMenuState = TextMenuTuttleInterface.TURN_MENU
         switch (key) {
             case (KeyEvent.VK_ESCAPE):
+            case '~':
                 newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
                 break
             case 'l':
@@ -195,7 +195,6 @@ class TextMenuTuttle extends Applet implements KeyListener {
                 newMenuState = TextMenuTuttleInterface.TURN_RIGHT_MENU
                 break
         }
-
         newMenuState
     }
 
@@ -203,6 +202,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
         int newMenuState = TextMenuTuttleInterface.TURN_LEFT_MENU
         switch (key) {
             case (KeyEvent.VK_ESCAPE):
+            case '~':
                 newMenuState = TextMenuTuttleInterface.TURN_MENU
                 break
             case '5':
@@ -215,6 +215,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
                 theTuttle.doCommand("tl 90")
                 break
         }
+        this.feedback()
         newMenuState
     }
 
@@ -222,6 +223,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
         int newMenuState = TextMenuTuttleInterface.TURN_RIGHT_MENU
         switch (key) {
             case (KeyEvent.VK_ESCAPE):
+            case '~':
                 newMenuState = TextMenuTuttleInterface.TURN_MENU
                 break
             case '5':
@@ -234,6 +236,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
                 theTuttle.doCommand("tr 90")
                 break
         }
+        this.feedback()
         newMenuState
     }
 
@@ -242,6 +245,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
         int newMenuState = TextMenuTuttleInterface.COLOR_MENU
         switch (key) {
             case (KeyEvent.VK_ESCAPE):
+            case '~':
                 newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
                 break
             case 'b':
@@ -258,6 +262,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
         int newMenuState = TextMenuTuttleInterface.BACKGROUND_COLOR_MENU
         switch (key) {
             case (KeyEvent.VK_ESCAPE):
+            case '~':
                 newMenuState = TextMenuTuttleInterface.COLOR_MENU
                 break
             case 'K':
@@ -285,6 +290,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
                 theTuttle.doCommand("bg blue")
                 break
         }
+        this.feedback()
         newMenuState
     }
 
@@ -292,6 +298,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
         int newMenuState = TextMenuTuttleInterface.FOREGROUND_COLOR_MENU
         switch (key) {
             case (KeyEvent.VK_ESCAPE):
+            case '~':
                 newMenuState = TextMenuTuttleInterface.COLOR_MENU
                 break
             case 'K':
@@ -319,6 +326,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
                 theTuttle.doCommand("fg blue")
                 break
         }
+        this.feedback()
         newMenuState
     }
 
@@ -326,6 +334,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
         int newMenuState = TextMenuTuttleInterface.PEN_MENU
         switch (key) {
             case (KeyEvent.VK_ESCAPE):
+            case '~':
                 newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
                 break
             case 'U':
@@ -337,6 +346,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
                 theTuttle.doCommand("pd")
                 break
         }
+        this.feedback()
         newMenuState
     }
 
@@ -344,6 +354,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
         int newMenuState = TextMenuTuttleInterface.SCREEN_MENU
         switch (key) {
             case (KeyEvent.VK_ESCAPE):
+            case '~':
                 newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
                 break
             case 'C':
@@ -359,6 +370,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
                 theTuttle.doCommand("cr")
                 break
         }
+        this.feedback()
         newMenuState
     }
 
@@ -366,6 +378,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
         int newMenuState = TextMenuTuttleInterface.HELP_MENU
         switch (key) {
             case (KeyEvent.VK_ESCAPE):
+            case '~':
                 newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
                 break
             case 'H':
@@ -377,6 +390,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
                 println "Show Version"
                 break
         }
+        this.feedback()
         newMenuState
     }
 
@@ -384,6 +398,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
         int newMenuState = TextMenuTuttleInterface.EXIT_MENU
         switch (key) {
             case (KeyEvent.VK_ESCAPE):
+            case '~':
             case 'N':
             case 'n':
                 newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
@@ -393,6 +408,7 @@ class TextMenuTuttle extends Applet implements KeyListener {
                 System.exit(0)
                 break
         }
+        this.feedback()
         newMenuState
     }
 

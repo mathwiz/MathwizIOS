@@ -25,19 +25,28 @@ class TextTuttle extends Tuttle {
             "cl", "rs", "cr", "exit"
     ]
 
+    String messageState
+
     TextTuttle(Applet applet, int width, int height) {
         super(applet, width, height)
     }
 
+    String getDetails() {
+        super.getDetails() + " Memo: ${messageState}"
+    }
+
     String doCommand(String theCommand) {
+        println "Received command ${theCommand}"
         StringTokenizer tokenizer = new StringTokenizer(theCommand)
-        String firstTerm = null
-        String reply = null
-        int thisCommand = UNKNOWN
+        String firstTerm
+        String reply
+        int thisCommand
 
         if (tokenizer.hasMoreTokens()) {
             firstTerm = tokenizer.nextToken().toLowerCase()
             thisCommand = identifyCommand(firstTerm)
+            println "Identified command ${thisCommand}"
+
             if (thisCommand == UNKNOWN) {
                 reply = "The command ${firstTerm} is not known!"
             } else {
@@ -47,10 +56,12 @@ class TextTuttle extends Tuttle {
             reply = "There does not seem to be a command given!"
         }
 
+        messageState = reply
         return reply
     }
 
-    String identifyCommand(String cmd) {
+    int identifyCommand(String cmd) {
+        println "Identifying ${cmd}"
         int thisCommand = MAX_COMMANDS
         int identified = UNKNOWN
         while (identified == UNKNOWN && thisCommand != UNKNOWN) {
@@ -60,12 +71,13 @@ class TextTuttle extends Tuttle {
                 thisCommand--
             }
         }
-        return identified
+        identified
     }
 
     String dispatchCommand(int commandId, StringTokenizer arguments) {
-        StringBuffer response = new StringBuffer()
-        boolean processed = false
+        def response = new StringBuffer()
+        def processed = false
+        println "dispatchCommand received: ${commandId}"
         switch (commandId) {
             case FORWARD:
             case BACKWARD:
@@ -75,6 +87,7 @@ class TextTuttle extends Tuttle {
                     int toStepOrTurn
                     try {
                         toStepOrTurn = Integer.parseInt(arguments.nextToken())
+                        println "toSTepOrTurn ${toStepOrTurn}"
                         switch (commandId) {
                             case FORWARD:
                                 this.forward(toStepOrTurn)
@@ -152,6 +165,7 @@ class TextTuttle extends Tuttle {
                 response.append("What?")
         }
 
+        println "dispatchCommand returning message " + response.toString()
         return response.toString()
     }
 
