@@ -13,12 +13,13 @@ class CommandLineTuttleInterface extends Panel {
 
     CommandLineTuttleInterface(Applet myApplet) {
         sendToHere = myApplet
-        commandFeedback = new TextArea(6, 60)
+        commandFeedback = new TextArea(6, 80)
         commandFeedback.setEditable(false)
 
-        commandArea = new TextField(60)
+        commandArea = new TextField(80)
         commandArea.addActionListener(sendToHere)
 
+        this.setLayout(new BorderLayout())
         this.add(commandFeedback, "Center")
         this.add(commandArea, "South")
     }

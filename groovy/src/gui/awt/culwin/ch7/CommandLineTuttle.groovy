@@ -6,7 +6,6 @@ import java.applet.Applet
 import java.awt.*
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
-import java.awt.event.KeyEvent
 
 class CommandLineTuttle extends Applet implements ActionListener {
     TextTuttle theTuttle
@@ -56,21 +55,75 @@ class CommandLineTuttle extends Applet implements ActionListener {
             case "exit":
                 resp = checkExit(second)
                 break
+            default:
+                resp = theTuttle.doCommand(cmd)
         }
 
+        theInterface.clearCommandArea()
         theInterface.appendFeedback("\n> ${cmd}")
         if (resp) {
-            theInterface.appendFeedback("\n${ resp}")
+            theInterface.appendFeedback("\n${resp}")
         }
+
         this.feedback()
     }
 
-    def obtainHelp(aString) {
+    def obtainHelp(String what) {
+        def theHelp = ""
 
+        if (what) {
+            def helpFor = theTuttle.identifyCommand(what.toLowerCase())
+            switch (helpFor) {
+                case TextTuttle.FORWARD:
+                    theHelp += "fd is Forward, followed by a number"
+                    break
+                case TextTuttle.BACKWARD:
+                    theHelp += "bd is Backward, followed by a number"
+                    break
+                case TextTuttle.TURN_LEFT:
+                    theHelp += "tl is Turn Left, followed by a number"
+                    break
+                case TextTuttle.TURN_RIGHT:
+                    theHelp += "tr is Turn Right, followed by a number"
+                    break
+                case TextTuttle.BACKGROUND:
+                    theHelp += "bg is Change Background, followed by a color"
+                    break
+                case TextTuttle.FOREGROUND:
+                    theHelp += "fg is Change Foreground, followed by a color"
+                    break
+                case TextTuttle.PEN_DOWN:
+                    theHelp += "pd is Pen Down"
+                    break
+                case TextTuttle.PEN_UP:
+                    theHelp += "pu is Pen Up"
+                    break
+                case TextTuttle.CLEAR:
+                    theHelp += "cl is Clear"
+                    break
+                case TextTuttle.CLEAR_AND_RESET:
+                    theHelp += "cr is Clear and Reset"
+                    break
+                case TextTuttle.RESET:
+                    theHelp += "rs is Reset"
+                    break
+                case TextTuttle.EXIT:
+                    theHelp += "Use 'exit please'"
+                    break
+                default:
+                    theHelp += "Sorry that command is not valid."
+            }
+        } else {
+            theHelp += "help is available for these commands: ${TextTuttle.commands}"
+        }
+        theHelp
     }
 
-    def checkExit(aString) {
-
+    def checkExit(String term) {
+        if (term == "please") {
+            System.exit(0)
+        }
+        "Use 'exit please' to quit"
     }
 
     static void main(String[] args) {

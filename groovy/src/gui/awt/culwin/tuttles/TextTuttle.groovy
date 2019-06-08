@@ -19,7 +19,7 @@ class TextTuttle extends Tuttle {
     static final int EXIT = 11
     static final int MAX_COMMANDS = 11
 
-    private static final String[] commands = [
+    public static final String[] commands = [
             "fd", "bd", "tr", "tl",
             "fg", "bg", "pu", "pd",
             "cl", "rs", "cr", "exit"
@@ -166,7 +166,7 @@ class TextTuttle extends Tuttle {
                 resp += ("What?")
         }
 
-        println "dispatchCommand returning message " + resp
+        println "dispatchCommand returning message ${resp}"
         resp
     }
 
