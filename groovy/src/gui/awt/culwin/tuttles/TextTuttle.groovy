@@ -71,6 +71,7 @@ class TextTuttle extends Tuttle {
                 thisCommand--
             }
         }
+        println "Identified command ${identified}"
         identified
     }
 
@@ -108,8 +109,8 @@ class TextTuttle extends Tuttle {
                     }
                 }
                 if (!processed) {
-                    response + commands[commandId]
-                    response + (" should be followed by a single number.")
+                    response += commands[commandId]
+                    response += (" should be followed by a single number.")
                 }
                 break
             case PEN_DOWN:
@@ -138,8 +139,8 @@ class TextTuttle extends Tuttle {
                     processed = true
                 }
                 if (!processed) {
-                    response + (commands[commandId])
-                    response + (" should not be followed by anything.")
+                    response += (commands[commandId])
+                    response += (" should not be followed by anything.")
                 }
                 break
             case FOREGROUND:
@@ -156,17 +157,17 @@ class TextTuttle extends Tuttle {
                     }
                 }
                 if (!processed) {
-                    response + (commands[commandId])
-                    response + (" should only be followed by")
-                    response + (" white, black, red, blue, green, or yellow.")
+                    response += (commands[commandId])
+                    response += (" should only be followed by")
+                    response += (" white, black, red, blue, green, or yellow.")
                 }
                 break
             default:
-                response + ("What?")
+                response += ("What?")
         }
 
-        println "dispatchCommand returning message " + response.toString()
-        return response.toString()
+        println "dispatchCommand returning message " + response
+        response
     }
 
     Color identifyColor(String color) {
