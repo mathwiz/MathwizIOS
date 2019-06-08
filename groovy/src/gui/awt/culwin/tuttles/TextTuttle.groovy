@@ -75,7 +75,7 @@ class TextTuttle extends Tuttle {
     }
 
     String dispatchCommand(int commandId, StringTokenizer arguments) {
-        def response = new StringBuffer()
+        def response = ""
         def processed = false
         println "dispatchCommand received: ${commandId}"
         switch (commandId) {
@@ -108,8 +108,8 @@ class TextTuttle extends Tuttle {
                     }
                 }
                 if (!processed) {
-                    response.append(commands[commandId])
-                    response.append(" should be followed by a single number.")
+                    response + commands[commandId]
+                    response + (" should be followed by a single number.")
                 }
                 break
             case PEN_DOWN:
@@ -138,8 +138,8 @@ class TextTuttle extends Tuttle {
                     processed = true
                 }
                 if (!processed) {
-                    response.append(commands[commandId])
-                    response.append(" should not be followed by anything.")
+                    response + (commands[commandId])
+                    response + (" should not be followed by anything.")
                 }
                 break
             case FOREGROUND:
@@ -156,13 +156,13 @@ class TextTuttle extends Tuttle {
                     }
                 }
                 if (!processed) {
-                    response.append(commands[commandId])
-                    response.append(" should only be followed by")
-                    response.append(" white, black, red, blue, green, or yellow.")
+                    response + (commands[commandId])
+                    response + (" should only be followed by")
+                    response + (" white, black, red, blue, green, or yellow.")
                 }
                 break
             default:
-                response.append("What?")
+                response + ("What?")
         }
 
         println "dispatchCommand returning message " + response.toString()
