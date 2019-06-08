@@ -75,8 +75,8 @@ class TextTuttle extends Tuttle {
         identified
     }
 
-    String dispatchCommand(int commandId, StringTokenizer arguments) {
-        def response = ""
+    def dispatchCommand(int commandId, StringTokenizer arguments) {
+        def resp = ""
         def processed = false
         println "dispatchCommand received: ${commandId}"
         switch (commandId) {
@@ -109,8 +109,8 @@ class TextTuttle extends Tuttle {
                     }
                 }
                 if (!processed) {
-                    response += commands[commandId]
-                    response += (" should be followed by a single number.")
+                    resp += commands[commandId]
+                    resp += (" should be followed by a single number.")
                 }
                 break
             case PEN_DOWN:
@@ -139,8 +139,8 @@ class TextTuttle extends Tuttle {
                     processed = true
                 }
                 if (!processed) {
-                    response += (commands[commandId])
-                    response += (" should not be followed by anything.")
+                    resp += (commands[commandId])
+                    resp += (" should not be followed by anything.")
                 }
                 break
             case FOREGROUND:
@@ -157,17 +157,17 @@ class TextTuttle extends Tuttle {
                     }
                 }
                 if (!processed) {
-                    response += (commands[commandId])
-                    response += (" should only be followed by")
-                    response += (" white, black, red, blue, green, or yellow.")
+                    resp += (commands[commandId])
+                    resp += (" should only be followed by")
+                    resp += (" white, black, red, blue, green, or yellow.")
                 }
                 break
             default:
-                response += ("What?")
+                resp += ("What?")
         }
 
-        println "dispatchCommand returning message " + response
-        response
+        println "dispatchCommand returning message " + resp
+        resp
     }
 
     Color identifyColor(String color) {

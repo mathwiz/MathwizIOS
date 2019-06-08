@@ -26,7 +26,6 @@ class TextMenuTuttle extends Applet implements KeyListener {
 
         theInterface = new TextMenuTuttleInterface(this)
 
-        this.setLayout(new BorderLayout())
         this.add(feedbackPanel, "North")
         this.add(tuttlePanel, "Center")
         this.add(theInterface, "South")
