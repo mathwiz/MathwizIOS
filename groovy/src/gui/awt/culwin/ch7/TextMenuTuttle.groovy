@@ -97,36 +97,50 @@ class TextMenuTuttle extends Applet implements KeyListener {
         this.feedback()
     }
 
-    private static int topLevelMenu(char key) {
+    private static int topLevelMenu(char c) {
+        char key = Character.toLowerCase(c)
         println "topLevelMenu ${key}"
-        Map<Character, Integer> menus = [
-                'M': TextMenuTuttleInterface.MOVE_MENU,
-                'm': TextMenuTuttleInterface.MOVE_MENU,
-                'T': TextMenuTuttleInterface.TURN_MENU,
-                't': TextMenuTuttleInterface.TURN_MENU,
-                'C': TextMenuTuttleInterface.COLOR_MENU,
-                'c': TextMenuTuttleInterface.COLOR_MENU,
-                'P': TextMenuTuttleInterface.PEN_MENU,
-                'p': TextMenuTuttleInterface.PEN_MENU,
-                'S': TextMenuTuttleInterface.SCREEN_MENU,
-                's': TextMenuTuttleInterface.SCREEN_MENU,
-                'H': TextMenuTuttleInterface.HELP_MENU,
-                'h': TextMenuTuttleInterface.HELP_MENU,
-                'E': TextMenuTuttleInterface.EXIT_MENU,
-                'e': TextMenuTuttleInterface.EXIT_MENU
-        ]
-        menus[key] ?: TextMenuTuttleInterface.TOP_LEVEL_MENU
+        int newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
+        switch (key) {
+            case 'm':
+                newMenuState = TextMenuTuttleInterface.MOVE_MENU
+                break
+            case 't':
+                newMenuState = TextMenuTuttleInterface.TURN_MENU
+                break
+            case 'c':
+                newMenuState = TextMenuTuttleInterface.COLOR_MENU
+                break
+            case 'p':
+                newMenuState = TextMenuTuttleInterface.PEN_MENU
+                break
+            case 's':
+                newMenuState = TextMenuTuttleInterface.SCREEN_MENU
+                break
+            case 'h':
+                newMenuState = TextMenuTuttleInterface.HELP_MENU
+                break
+            case 'e':
+                newMenuState = TextMenuTuttleInterface.EXIT_MENU
+                break
+        }
+        newMenuState
     }
 
-    private static int moveMenu(char key) {
-        Map<Character, Integer> menus = [
-                (KeyEvent.VK_ESCAPE): TextMenuTuttleInterface.TOP_LEVEL_MENU,
-                'F': TextMenuTuttleInterface.MOVE_FORWARD_MENU,
-                'f': TextMenuTuttleInterface.MOVE_FORWARD_MENU,
-                'B': TextMenuTuttleInterface.MOVE_BACKWARD_MENU,
-                'b': TextMenuTuttleInterface.MOVE_BACKWARD_MENU
-        ]
-        menus[key] ?: TextMenuTuttleInterface.MOVE_MENU
+    private static int moveMenu(char c) {
+        char key = Character.toLowerCase(c)
+        int newMenuState = TextMenuTuttleInterface.MOVE_MENU
+        switch (key) {
+            case (KeyEvent.VK_ESCAPE):
+                newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
+                break
+            case 'f':
+                newMenuState = TextMenuTuttleInterface.MOVE_FORWARD_MENU
+                break
+            case 'b':
+                newMenuState = TextMenuTuttleInterface.MOVE_BACKWARD_MENU
+        }
+        newMenuState
     }
 
     int moveForwardMenu(char key) {
@@ -167,15 +181,22 @@ class TextMenuTuttle extends Applet implements KeyListener {
         newMenuState
     }
 
-    private static int turnMenu(char key) {
-        Map<Character, Integer> menus = [
-                (KeyEvent.VK_ESCAPE): TextMenuTuttleInterface.TOP_LEVEL_MENU,
-                'L': TextMenuTuttleInterface.TURN_LEFT_MENU,
-                'l': TextMenuTuttleInterface.TURN_LEFT_MENU,
-                'R': TextMenuTuttleInterface.TURN_RIGHT_MENU,
-                'r': TextMenuTuttleInterface.TURN_RIGHT_MENU
-        ]
-        menus[key] ?: TextMenuTuttleInterface.TURN_MENU
+    private static int turnMenu(char c) {
+        char key = Character.toLowerCase(c)
+        int newMenuState = TextMenuTuttleInterface.TURN_MENU
+        switch (key) {
+            case (KeyEvent.VK_ESCAPE):
+                newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
+                break
+            case 'l':
+                newMenuState = TextMenuTuttleInterface.TURN_LEFT_MENU
+                break
+            case 'r':
+                newMenuState = TextMenuTuttleInterface.TURN_RIGHT_MENU
+                break
+        }
+
+        newMenuState
     }
 
     int turnLeftMenu(char key) {
@@ -216,15 +237,21 @@ class TextMenuTuttle extends Applet implements KeyListener {
         newMenuState
     }
 
-    private static int colorMenu(char key) {
-        Map<Character, Integer> menus = [
-                (KeyEvent.VK_ESCAPE): TextMenuTuttleInterface.TOP_LEVEL_MENU,
-                'B': TextMenuTuttleInterface.BACKGROUND_COLOR_MENU,
-                'b': TextMenuTuttleInterface.BACKGROUND_COLOR_MENU,
-                'F': TextMenuTuttleInterface.FOREGROUND_COLOR_MENU,
-                'f': TextMenuTuttleInterface.FOREGROUND_COLOR_MENU
-        ]
-        menus[key] ?: TextMenuTuttleInterface.COLOR_MENU
+    private static int colorMenu(char c) {
+        char key = Character.toLowerCase(c)
+        int newMenuState = TextMenuTuttleInterface.COLOR_MENU
+        switch (key) {
+            case (KeyEvent.VK_ESCAPE):
+                newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
+                break
+            case 'b':
+                newMenuState = TextMenuTuttleInterface.BACKGROUND_COLOR_MENU
+                break
+            case 'f':
+                newMenuState = TextMenuTuttleInterface.FOREGROUND_COLOR_MENU
+                break
+        }
+        newMenuState
     }
 
     int backgroundColorMenu(char key) {
