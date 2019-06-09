@@ -35,7 +35,6 @@ class UndoingTextMenuTuttleInterface extends Panel {
     private static final String screenMenu = "\n\tSCreen: (C)lear (R)eset Clear(A)ndReset"
     private static final String helpMenu = "\n\tHelp; (H)elp (V)ersion"
     private static final String exitMenu = "\n\tExit: (Y)es (N)o"
-    private final String undoMenu = "\n\tUndo ${undoCommand}: (Y)es (N)o"
 
     private int menuState = TOP_LEVEL_MENU
 
@@ -102,7 +101,7 @@ class UndoingTextMenuTuttleInterface extends Panel {
                 break
             case UNDO_MENU:
                 if (undoCommand) {
-                    menuArea.setText(topLevelMenu + undoMenu)
+                    menuArea.setText(topLevelMenu + "\n\tUndo ${undoCommand}: (Y)es (N)o")
                 } else {
                     menuArea.setText(topLevelMenu + "\n\tUndo is not available")
                 }
