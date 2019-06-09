@@ -12,6 +12,7 @@ class BufferedTuttle extends TextTuttle {
     static final int UNDO = 12
     static final int LOAD = 13
     static final int SAVE = 14
+    static final int SHOW = 15
     static final int MAX_COMMANDS = 15
 
     private boolean tuttleShowing
@@ -61,7 +62,7 @@ class BufferedTuttle extends TextTuttle {
     }
 
     def whatUndoIsAvailable() {
-        commandBuffer.join(" ")
+        commandBuffer.join("|")
     }
 
     def clearAndReset(Color c) {
@@ -81,7 +82,8 @@ class BufferedTuttle extends TextTuttle {
         String reply = ""
         int numCommands = commandBuffer.size()
         if (numCommands > 0) {
-            def last = commandBuffer.pop()
+            def last = commandBuffer.get(numCommands-1)
+            commandBuffer.remove(numCommands-1)
             reply += "undo " + last
             hideTuttle()
             restoreTuttleStatus()
@@ -95,12 +97,16 @@ class BufferedTuttle extends TextTuttle {
         reply
     }
 
+    def showCommands() {
+        whatUndoIsAvailable()
+    }
+
     def save(StringTokenizer what) {
-        println "save called"
+        "save called"
     }
 
     def load(StringTokenizer what) {
-        println "load called"
+        "load called"
     }
 
     def storeTuttleStatus() {
@@ -146,6 +152,8 @@ class BufferedTuttle extends TextTuttle {
                 reply = save(tokenizer)
             } else if (thisCommand == LOAD) {
                 reply = load(tokenizer)
+            } else if (thisCommand == SHOW) {
+                reply = showCommands()
             } else {
                 reply = super.doCommand(theCommand)
             }
@@ -157,7 +165,8 @@ class BufferedTuttle extends TextTuttle {
             if (thisCommand == CLEAR_AND_RESET || thisCommand == CLEAR) {
                 storeTuttleStatus()
             } else if (thisCommand != CLEAR && thisCommand != CLEAR_AND_RESET
-                    && thisCommand != SAVE && thisCommand != LOAD) {
+                    && thisCommand != SAVE && thisCommand != LOAD
+                    && thisCommand != SHOW) {
                 commandBuffer.add(theCommand)
             }
         }
@@ -173,6 +182,8 @@ class BufferedTuttle extends TextTuttle {
             return SAVE
         } else if (cmd == "load") {
             return LOAD
+        } else if (cmd == "show") {
+            return SHOW
         } else {
             return super.identifyCommand(cmd)
         }

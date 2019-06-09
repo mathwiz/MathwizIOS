@@ -59,7 +59,6 @@ class UndoingCommandLineTuttle extends Applet implements ActionListener {
                 resp = checkExit(second)
                 break
             default:
-
                 resp = theTuttle.doCommand(cmd)
         }
 
