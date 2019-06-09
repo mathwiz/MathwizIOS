@@ -15,7 +15,7 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener {
     Label feedbackLabel = new Label()
     Panel feedbackPanel = new Panel()
     Panel tuttlePanel = new Panel()
-    TextMenuTuttleInterface theInterface
+    UndoingTextMenuTuttleInterface theInterface
 
     void init() {
         this.setLayout(new BorderLayout())
@@ -27,7 +27,7 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener {
         theTuttle = new BufferedTuttle(this, 500, 500)
         tuttlePanel.add(theTuttle)
 
-        theInterface = new TextMenuTuttleInterface(this)
+        theInterface = new UndoingTextMenuTuttleInterface(this)
 
         this.add(feedbackPanel, "North")
         this.add(tuttlePanel, "Center")
@@ -87,6 +87,8 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener {
             newMenu = foregroundColorMenu(pressed)
         } else if (menuState == TextMenuTuttleInterface.BACKGROUND_COLOR_MENU) {
             newMenu = backgroundColorMenu(pressed)
+        } else if (menuState == UndoingTextMenuTuttleInterface.UNDO_MENU) {
+            newMenu = undoMenu(pressed)
         }
 
         println "New menu is ${newMenu}"
@@ -390,6 +392,29 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener {
             case 'V':
             case 'v':
                 println "Show Version"
+                break
+        }
+        this.feedback()
+        newMenuState
+    }
+
+    int undoMenu(char key) {
+        int newMenuState = UndoingTextMenuTuttleInterface.UNDO_MENU
+        switch (key) {
+            case (KeyEvent.VK_ESCAPE):
+            case '~':
+                newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
+                break
+            case 'Y':
+            case 'y':
+                if (theTuttle.isUndoAvailable()) {
+                    theTuttle.doCommand("undo")
+                }
+                newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
+                break
+            case 'N':
+            case 'n':
+                newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
                 break
         }
         this.feedback()

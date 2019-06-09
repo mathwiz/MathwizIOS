@@ -62,7 +62,7 @@ class BufferedTuttle extends TextTuttle {
     }
 
     def whatUndoIsAvailable() {
-        commandBuffer.join("|")
+        commandBuffer.get(commandBuffer.size()-1)
     }
 
     def clearAndReset(Color c) {
@@ -98,7 +98,7 @@ class BufferedTuttle extends TextTuttle {
     }
 
     def showCommands() {
-        whatUndoIsAvailable()
+        commandBuffer.join("|")
     }
 
     def save(StringTokenizer what) {
