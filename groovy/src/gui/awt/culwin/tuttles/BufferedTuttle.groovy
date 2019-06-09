@@ -3,7 +3,7 @@ package gui.awt.culwin.tuttles
 import java.applet.Applet
 import java.awt.*
 
-class TextTuttle extends Tuttle {
+class BufferedTuttle extends TextTuttle {
     static final int UNKNOWN = -1
     static final int FORWARD = 0
     static final int BACKWARD = 1
@@ -27,8 +27,12 @@ class TextTuttle extends Tuttle {
 
     String messageState
 
-    TextTuttle(Applet applet, int width, int height) {
+    BufferedTuttle(Applet applet, int width, int height) {
         super(applet, width, height)
+    }
+
+    String getDetails() {
+        super.getDetails() + " Memo: ${messageState}"
     }
 
     String doCommand(String theCommand) {
