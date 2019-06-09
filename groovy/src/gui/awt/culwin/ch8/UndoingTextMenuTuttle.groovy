@@ -91,6 +91,12 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener {
             newMenu = undoMenu(pressed)
         }
 
+        if (theTuttle.isUndoAvailable()) {
+            theInterface.setUndoCommand(theTuttle.whatUndoIsAvailable())
+        } else {
+            theInterface.setUndoCommand("")
+        }
+
         println "New menu is ${newMenu}"
         theInterface.setMenuState(newMenu)
         this.feedback()
@@ -120,6 +126,9 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener {
                 break
             case 'e':
                 newMenuState = TextMenuTuttleInterface.EXIT_MENU
+                break
+            case 'u':
+                newMenuState = UndoingTextMenuTuttleInterface.UNDO_MENU
                 break
         }
         newMenuState
