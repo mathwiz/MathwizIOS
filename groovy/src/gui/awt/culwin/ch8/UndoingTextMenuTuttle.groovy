@@ -430,6 +430,29 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener {
         newMenuState
     }
 
+    int fileMenu(char key) {
+        int newMenuState = UndoingTextMenuTuttleInterface.UNDO_MENU
+        switch (key) {
+            case (KeyEvent.VK_ESCAPE):
+            case '~':
+                newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
+                break
+            case 'Y':
+            case 'y':
+                if (theTuttle.isUndoAvailable()) {
+                    theTuttle.doCommand("undo")
+                }
+                newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
+                break
+            case 'N':
+            case 'n':
+                newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
+                break
+        }
+        this.feedback()
+        newMenuState
+    }
+
     int exitMenu(char key) {
         int newMenuState = TextMenuTuttleInterface.EXIT_MENU
         switch (key) {
