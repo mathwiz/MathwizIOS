@@ -1,21 +1,25 @@
 package gui.awt.culwin.ch8
 
-
 import gui.awt.culwin.ch7.TextMenuTuttleInterface
 import gui.awt.culwin.tuttles.BufferedTuttle
-import gui.awt.culwin.tuttles.TextTuttle
 
 import java.applet.Applet
 import java.awt.*
+import java.awt.event.ActionEvent
+import java.awt.event.ActionListener
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 
-class UndoingTextMenuTuttle extends Applet implements KeyListener {
+class UndoingTextMenuTuttle extends Applet implements KeyListener, ActionListener {
     BufferedTuttle theTuttle
     Label feedbackLabel = new Label()
     Panel feedbackPanel = new Panel()
     Panel tuttlePanel = new Panel()
     UndoingTextMenuTuttleInterface theInterface
+
+    Frame tuttleFrame = new Frame()
+    TuttleOpenDialog openDialog
+    TuttleOpenErrorDialog errorDialog
 
     void init() {
         this.setLayout(new BorderLayout())
@@ -28,13 +32,19 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener {
         tuttlePanel.add(theTuttle)
 
         theInterface = new UndoingTextMenuTuttleInterface(this)
+        theInterface.setMenuState(TextMenuTuttleInterface.TOP_LEVEL_MENU)
 
-        this.add(feedbackPanel, "North")
-        this.add(tuttlePanel, "Center")
-        this.add(theInterface, "South")
+        tuttleFrame.setLayout(new BorderLayout())
+        tuttleFrame.add(feedbackPanel, "North")
+        tuttleFrame.add(tuttlePanel, "Center")
+        tuttleFrame.add(theInterface, "South")
+        tuttleFrame.setSize(tuttleFrame.getPreferredSize())
 
         this.feedback()
-        theInterface.setMenuState(TextMenuTuttleInterface.TOP_LEVEL_MENU)
+        tuttleFrame.setVisible(true)
+
+        openDialog = new TuttleOpenDialog(tuttleFrame, this)
+        errorDialog = new TuttleOpenErrorDialog(tuttleFrame, this)
     }
 
     def feedback() {
@@ -89,6 +99,8 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener {
             newMenu = backgroundColorMenu(pressed)
         } else if (menuState == UndoingTextMenuTuttleInterface.UNDO_MENU) {
             newMenu = undoMenu(pressed)
+        } else if (menuState == UndoingTextMenuTuttleInterface.FILE_MENU) {
+            newMenu = fileMenu(pressed)
         }
 
         if (theTuttle.isUndoAvailable()) {
@@ -100,6 +112,22 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener {
         println "New menu is ${newMenu}"
         theInterface.setMenuState(newMenu)
         this.feedback()
+    }
+
+    @Override
+    void actionPerformed(ActionEvent actionEvent) {
+        String cmd = actionEvent.getActionCommand()
+        if (cmd == "loadit") {
+            if (openDialog.isFilenameAvailable()) {
+                String path = openDialog.fullFilenameIs()
+                println "Trying to load ${path}"
+                String reply = theTuttle.doCommand("load ${path}")
+                if (reply) {
+                    errorDialog.setReason("${path} could not be opened")
+                    errorDialog.setVisible(true)
+                }
+            }
+        }
     }
 
     private static int topLevelMenu(char c) {
@@ -129,6 +157,9 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener {
                 break
             case 'u':
                 newMenuState = UndoingTextMenuTuttleInterface.UNDO_MENU
+                break
+            case 'f':
+                newMenuState = UndoingTextMenuTuttleInterface.FILE_MENU
                 break
         }
         newMenuState
@@ -431,21 +462,19 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener {
     }
 
     int fileMenu(char key) {
-        int newMenuState = UndoingTextMenuTuttleInterface.UNDO_MENU
+        int newMenuState = UndoingTextMenuTuttleInterface.FILE_MENU
         switch (key) {
             case (KeyEvent.VK_ESCAPE):
             case '~':
                 newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
                 break
-            case 'Y':
-            case 'y':
-                if (theTuttle.isUndoAvailable()) {
-                    theTuttle.doCommand("undo")
-                }
+            case 'S':
+            case 's':
                 newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
                 break
-            case 'N':
-            case 'n':
+            case 'L':
+            case 'l':
+                openDialog.setVisible(true)
                 newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
                 break
         }

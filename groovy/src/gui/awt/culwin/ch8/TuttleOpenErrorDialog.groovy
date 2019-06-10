@@ -19,6 +19,7 @@ class TuttleOpenErrorDialog extends TuttleBaseDialog {
         buttonPanel.setBackground(Color.WHITE)
         buttonPanel.add(okButton)
         this.add(buttonPanel, "South")
+        setVisible(false)
     }
 
     void setReason(String s) {

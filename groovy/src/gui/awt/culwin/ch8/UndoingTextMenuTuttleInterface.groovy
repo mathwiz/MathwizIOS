@@ -20,8 +20,9 @@ class UndoingTextMenuTuttleInterface extends Panel {
     static final int HELP_MENU = 12
     static final int EXIT_MENU = 13
     static final int UNDO_MENU = 14
+    static final int FILE_MENU = 15
 
-    private static final String topLevelMenu = "(M)ove (T)urn (C)olors (P)en (S)creen (H)elp (U)ndo (E)xit"
+    private static final String topLevelMenu = "(M)ove (T)urn (C)olors (P)en (S)creen (H)elp (U)ndo (F)ile (E)xit"
     private static final String moveMenu = "\n Move: (F)orwards (B)ackwards"
     private static final String moveForwardsMenu = "\n  Move Forwards: 10 20 50"
     private static final String moveBackwardsMenu = "\n  Move Backwards: 10 20 50"
@@ -34,6 +35,7 @@ class UndoingTextMenuTuttleInterface extends Panel {
     private static final String penMenu = "\n Pen: (U)p (D)own"
     private static final String screenMenu = "\n SCreen: (C)lear (R)eset Clear(A)ndReset"
     private static final String helpMenu = "\n Help; (H)elp (V)ersion"
+    private static final String fileMenu = "\n File; (S)ave (L)oad"
     private static final String exitMenu = "\n Exit: (Y)es (N)o"
 
     private int menuState = TOP_LEVEL_MENU
@@ -99,11 +101,14 @@ class UndoingTextMenuTuttleInterface extends Panel {
             case EXIT_MENU:
                 menuArea.setText(topLevelMenu + exitMenu)
                 break
+            case FILE_MENU:
+                menuArea.setText(topLevelMenu + fileMenu)
+                break
             case UNDO_MENU:
                 if (undoCommand) {
-                    menuArea.setText(topLevelMenu + "\n\tUndo ${undoCommand}: (Y)es (N)o")
+                    menuArea.setText(topLevelMenu + "\n Undo ${undoCommand}: (Y)es (N)o")
                 } else {
-                    menuArea.setText(topLevelMenu + "\n\tUndo is not available")
+                    menuArea.setText(topLevelMenu + "\n Undo is not available")
                 }
                 break
         }

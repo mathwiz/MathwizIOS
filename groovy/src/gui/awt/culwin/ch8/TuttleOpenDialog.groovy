@@ -19,6 +19,7 @@ class TuttleOpenDialog extends FileDialog {
         super(parentFrame, "Tuttle Open", FileDialog.LOAD)
         itsParentWindow = parentFrame as Window
         itsListener = listener
+        setVisible(false)
     }
 
     @Override
@@ -64,6 +65,6 @@ class TuttleOpenDialog extends FileDialog {
     }
 
     String fullFilenameIs() {
-        "${openDirname}/${openDirname}"
+        "${openDirname}${openFilename}"
     }
 }
