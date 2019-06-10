@@ -32,6 +32,6 @@ class TuttleSaveErrorDialog extends TuttleBaseDialog {
     @Override
     void actionPerformed(ActionEvent actionEvent) {
         setVisible(false)
-        itsListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "save"))
+        itsListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "saveas"))
     }
 }

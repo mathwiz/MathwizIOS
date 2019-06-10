@@ -20,6 +20,8 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener, ActionListene
     Frame tuttleFrame = new Frame()
     TuttleOpenDialog openDialog
     TuttleOpenErrorDialog openErrorDialog
+    TuttleSaveDialog saveDialog
+    TuttleSaveErrorDialog saveErrorDialog
 
     void init() {
         this.setLayout(new BorderLayout())
@@ -45,6 +47,8 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener, ActionListene
 
         openDialog = new TuttleOpenDialog(tuttleFrame, this)
         openErrorDialog = new TuttleOpenErrorDialog(tuttleFrame, this)
+        saveDialog = new TuttleSaveDialog(tuttleFrame, this)
+        saveErrorDialog = new TuttleSaveErrorDialog(tuttleFrame, this)
     }
 
     def feedback() {
@@ -125,10 +129,30 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener, ActionListene
                 if (reply) {
                     openErrorDialog.setReason("${path} could not be opened")
                     openErrorDialog.setVisible(true)
+                    saveDialog.clearFullFilename()
+                } else {
+                    saveDialog.setFullFilename(openDialog.filenameIs(), openDialog.dirnameIs())
                 }
             }
-        } else if (cmd == "open") {
-
+        } else if (cmd == "saveas") {
+            saveDialog.setVisible(true)
+        } else if (cmd == "save") {
+            if (saveDialog.isFilenameAvailable()) {
+                this.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "saveit"))
+            } else {
+                saveDialog.setVisible(true)
+            }
+        } else if (cmd == "saveit") {
+            String path = saveDialog.fullFilenameIs()
+            println "Trying to load ${path}"
+            String reply = theTuttle.doCommand("save ${path}")
+            if (reply) {
+                saveErrorDialog.setReason("${path} could not be saved")
+                saveErrorDialog.setVisible(true)
+                saveDialog.clearFullFilename()
+            } else {
+                saveDialog.setFullFilename(openDialog.filenameIs(), openDialog.dirnameIs())
+            }
         }
     }
 
@@ -472,6 +496,7 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener, ActionListene
                 break
             case 'S':
             case 's':
+                saveDialog.setVisible(true)
                 newMenuState = TextMenuTuttleInterface.TOP_LEVEL_MENU
                 break
             case 'L':

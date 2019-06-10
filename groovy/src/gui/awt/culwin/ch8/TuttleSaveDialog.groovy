@@ -8,8 +8,8 @@ class TuttleSaveDialog extends FileDialog {
     protected Window itsParentWindow
     protected ActionListener itsListener
 
-    private String openFilename
-    private String openDirname
+    private String filename
+    private String dirname
 
     TuttleSaveDialog(Frame parentFrame, ActionListener listener) {
         super(parentFrame, "Tuttle Save", FileDialog.SAVE)
@@ -36,12 +36,12 @@ class TuttleSaveDialog extends FileDialog {
 
             String tempDirname = getDirectory()
             if (tempDirname) {
-                openDirname = tempDirname
+                dirname = tempDirname
             }
 
             String tempFilename = getFile()
             if (tempFilename) {
-                openFilename = tempFilename
+                filename = tempFilename
                 itsListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "save"))
             }
         }
@@ -49,28 +49,28 @@ class TuttleSaveDialog extends FileDialog {
     }
 
     boolean isFilenameAvailable() {
-        openFilename != null
+        filename != null
     }
 
     String filenameIs() {
-        openFilename
+        filename
     }
 
     String dirnameIs() {
-        openDirname
+        dirname
     }
 
     String fullFilenameIs() {
-        "${openDirname}${openFilename}"
+        "${dirname}${filename}"
     }
 
-    void setFullFilename(String path) {
-        openDirname = path
-        openFilename = ""
+    void setFullFilename(String path, String file) {
+        dirname = path
+        filename = file
     }
 
     void clearFullFilename() {
-        openDirname = null
-        openFilename = null
+        dirname = null
+        filename = null
     }
 }
