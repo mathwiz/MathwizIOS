@@ -145,23 +145,32 @@ class BufferedTuttle extends TextTuttle {
     def load(String file) {
         String reply = ""
         try {
-            def saveHere = new PrintWriter(new FileOutputStream(file))
-            saveHere.println(identifyColorAsString(startBackground))
-            saveHere.println("fg " + identifyColorAsString(startForeground))
-            saveHere.println("pu")
-            saveHere.println("tr 90")
-            saveHere.println("fd " + startX)
-            saveHere.println("tl 90")
-            saveHere.println("fd " + startY)
-            saveHere.println("tr " + startDirection)
-            saveHere.println(startPenStatus ? "pd" : "pu")
-            commandBuffer.each {
-                saveHere.println(it)
+            int loadCount = 0
+            boolean allDone = false
+            def toLoad = new BufferedReader(new FileReader(file))
+            this.hideTuttle()
+            def theCommand = toLoad.readLine()
+            if (identifyColor(theCommand)) {
+                this.clearAndReset(identifyColor(theCommand))
+            } else {
+                throw new IOException("Wrong first line: ${theCommand}")
             }
-            saveHere.close()
+            while (!allDone) {
+                theCommand = toLoad.readLine()
+                if (theCommand) {
+                    doCommand(theCommand)
+                    if (loadCount++ == 8) {
+                        storeTuttleStatus()
+                    }
+                } else {
+                    allDone = true
+                }
+            }
+            toLoad.close()
         } catch (IOException e) {
-            reply = "The drawing could not be saved: " + e.getMessage()
+            reply = "The drawing could not be loaded: " + e.getMessage()
         }
+        this.showTuttle()
         reply
     }
 
