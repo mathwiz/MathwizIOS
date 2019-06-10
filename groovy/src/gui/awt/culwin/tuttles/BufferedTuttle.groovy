@@ -15,6 +15,24 @@ class BufferedTuttle extends TextTuttle {
     static final int SHOW = 15
     static final int MAX_COMMANDS = 15
 
+    private static String identifyColorAsString(Color c) {
+        if (c.equals(Color.BLACK)) {
+            return "black"
+        } else if (c.equals(Color.WHITE)) {
+            return "white"
+        } else if (c.equals(Color.RED)) {
+            return "red"
+        } else if (c.equals(Color.GREEN)) {
+            return "green"
+        } else if (c.equals(Color.YELLOW)) {
+            return "yellow"
+        } else if (c.equals(Color.BLUE)) {
+            return "blue"
+        } else {
+            return "unknown color"
+        }
+    }
+
     private boolean tuttleShowing
     private int startX
     private int startY
@@ -101,12 +119,50 @@ class BufferedTuttle extends TextTuttle {
         commandBuffer.join("|")
     }
 
-    def save(StringTokenizer what) {
-        "save called"
+    def save(String file) {
+        String reply = ""
+        try {
+            def saveHere = new PrintWriter(new FileOutputStream(file))
+            saveHere.println(identifyColorAsString(startBackground))
+            saveHere.println("fg " + identifyColorAsString(startForeground))
+            saveHere.println("pu")
+            saveHere.println("tr 90")
+            saveHere.println("fd " + startX)
+            saveHere.println("tl 90")
+            saveHere.println("fd " + startY)
+            saveHere.println("tr " + startDirection)
+            saveHere.println(startPenStatus ? "pd" : "pu")
+            commandBuffer.each {
+                saveHere.println(it)
+            }
+            saveHere.close()
+        } catch (IOException e) {
+            reply = "The drawing could not be saved: " + e.getMessage()
+        }
+        reply
     }
 
-    def load(StringTokenizer what) {
-        "load called"
+    def load(String file) {
+        String reply = ""
+        try {
+            def saveHere = new PrintWriter(new FileOutputStream(file))
+            saveHere.println(identifyColorAsString(startBackground))
+            saveHere.println("fg " + identifyColorAsString(startForeground))
+            saveHere.println("pu")
+            saveHere.println("tr 90")
+            saveHere.println("fd " + startX)
+            saveHere.println("tl 90")
+            saveHere.println("fd " + startY)
+            saveHere.println("tr " + startDirection)
+            saveHere.println(startPenStatus ? "pd" : "pu")
+            commandBuffer.each {
+                saveHere.println(it)
+            }
+            saveHere.close()
+        } catch (IOException e) {
+            reply = "The drawing could not be saved: " + e.getMessage()
+        }
+        reply
     }
 
     def storeTuttleStatus() {
@@ -149,9 +205,17 @@ class BufferedTuttle extends TextTuttle {
             if (thisCommand == UNDO) {
                 reply = undo()
             } else if (thisCommand == SAVE) {
-                reply = save(tokenizer)
+                if (tokenizer.countTokens() == 1) {
+                    reply = save(tokenizer.nextToken())
+                } else {
+                    reply = "save must be followed by only a filename"
+                }
             } else if (thisCommand == LOAD) {
-                reply = load(tokenizer)
+                if (tokenizer.countTokens() == 1) {
+                    reply = load(tokenizer.nextToken())
+                } else {
+                    reply = "load must be followed by only a filename"
+                }
             } else if (thisCommand == SHOW) {
                 reply = showCommands()
             } else {
