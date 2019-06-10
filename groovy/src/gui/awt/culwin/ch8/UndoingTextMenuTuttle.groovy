@@ -19,7 +19,7 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener, ActionListene
 
     Frame tuttleFrame = new Frame()
     TuttleOpenDialog openDialog
-    TuttleOpenErrorDialog errorDialog
+    TuttleOpenErrorDialog openErrorDialog
 
     void init() {
         this.setLayout(new BorderLayout())
@@ -44,7 +44,7 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener, ActionListene
         tuttleFrame.setVisible(true)
 
         openDialog = new TuttleOpenDialog(tuttleFrame, this)
-        errorDialog = new TuttleOpenErrorDialog(tuttleFrame, this)
+        openErrorDialog = new TuttleOpenErrorDialog(tuttleFrame, this)
     }
 
     def feedback() {
@@ -123,10 +123,12 @@ class UndoingTextMenuTuttle extends Applet implements KeyListener, ActionListene
                 println "Trying to load ${path}"
                 String reply = theTuttle.doCommand("load ${path}")
                 if (reply) {
-                    errorDialog.setReason("${path} could not be opened")
-                    errorDialog.setVisible(true)
+                    openErrorDialog.setReason("${path} could not be opened")
+                    openErrorDialog.setVisible(true)
                 }
             }
+        } else if (cmd == "open") {
+
         }
     }
 
