@@ -1,7 +1,5 @@
 package gui.awt.culwin.ch9
 
-import gui.awt.culwin.c3.datepanel.DatePanel
-
 import java.applet.Applet
 import java.awt.*
 import java.awt.event.ActionEvent
@@ -11,6 +9,10 @@ class DatePanelDemonstration extends Applet implements ActionListener{
     DatePanel datePanel
 
     void init(){
+        Properties preset = System.getProperties()
+        String lang = preset.getProperty("user.language")
+        println "Language: ${lang}"
+
         datePanel = new DatePanel()
         datePanel.setActionCommand("DatePanelDemonstration Applet")
         datePanel.addActionListener(this)

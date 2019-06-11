@@ -10,20 +10,21 @@ import java.awt.event.ItemEvent
 import java.awt.event.ItemListener
 
 class DatePanel extends Panel implements ActionListener, ItemListener {
-    static final String[] monthNames = [
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ]
 
     MonthPanel monthPanel
     Choice centuryChoice, decadeChoice, yearChoice, monthChoice
     String actionCommand
     ActionListener listener
+    ResourceBundle resources
 
     DatePanel() {
         this(DateUtility.yearIs(), DateUtility.monthIs(), DateUtility.dayOfMonthIs())
     }
 
     DatePanel(int year, int month, int day) {
+        resources = ResourceBundle.getBundle("gui.awt.culwin.ch9.DatePanelResources")
+        String[] monthNames = resources.getObject("monthNames") as String[]
+
         Panel topPanel = new Panel()
         Panel topLeftPanel = new Panel()
         Panel topRightPanel = new Panel()
