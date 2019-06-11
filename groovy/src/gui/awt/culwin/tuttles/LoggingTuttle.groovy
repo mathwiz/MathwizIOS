@@ -7,7 +7,7 @@ class LoggingTuttle extends BufferedTuttle {
     private boolean loggingActive = false
     private PrintWriter logFile
 
-    LoggingTuttle(Applet applet, MouseListener listener, int witdth, int height) {
+    LoggingTuttle(Applet applet, MouseListener listener, int width, int height) {
         super(applet, width, height)
         this.addMouseListener(listener)
     }
@@ -24,10 +24,43 @@ class LoggingTuttle extends BufferedTuttle {
         }
     }
 
+    void startLogging() {
+        TimeStamp theTime = new TimeStamp(true).toString()
+        String filename = "tlog"
+        filename += TimeStamp.pad(theTime.hours)
+        filename += TimeStamp.pad(theTime.minutes)
+        filename += TimeStamp.pad(theTime.seconds)
+        filename += ".log"
+
+        try {
+            logFile = new PrintWriter(new FileOutputStream(filename))
+        } catch (IOException e) {
+            System.err.println("Log file could not be opened. Logging to terminal.")
+            logFile = new PrintWriter(System.out, true)
+        }
+        loggingActive = true
+    }
+
+    void stopLogging() {
+        logCommand("Logging stopped.")
+        logFile.close()
+        loggingActive = false
+    }
+
+    boolean isLoggingActive() {
+        loggingActive
+    }
+
+
+    //Helper class
     class TimeStamp {
         private static final int SECONDS_PER_MIN = 60
         private static final int SECONDS_PER_HOUR = SECONDS_PER_MIN * 60
         private static final int INVALID_TIME = -1
+
+        static String pad(int num) {
+            (num < 10 ? "0" : "") + num
+        }
 
         private int theStamp = INVALID_TIME
 
@@ -60,21 +93,26 @@ class LoggingTuttle extends BufferedTuttle {
             theStamp != INVALID_TIME
         }
 
+        int getHours() {
+            valid ? theStamp / SECONDS_PER_HOUR : 0
+        }
+
+        int getMinutes() {
+            valid ? (theStamp - hours*SECONDS_PER_HOUR) / SECONDS_PER_MIN : 0
+        }
+
+        int getSeconds() {
+            valid ? theStamp % SECONDS_PER_MIN : 0
+        }
+
         String toString() {
             def theTime = "**:**:**"
             if (isValid()) {
-                int hours = theStamp / SECONDS_PER_HOUR
-                int secs = theStamp % SECONDS_PER_MIN
-                int mins = (theStamp - hours*SECONDS_PER_HOUR) / SECONDS_PER_MIN
                 theTime += pad(hours)
-                theTime += ":" + pad(mins)
-                theTime += ":" + pad(secs)
+                theTime += ":" + pad(minutes)
+                theTime += ":" + pad(seconds)
             }
             theTime
         }
-
-        String pad(int num) {
-            (num < 10 ? "0" : "") + num
-        }
-    }
+    } // TimeStamp
 }
