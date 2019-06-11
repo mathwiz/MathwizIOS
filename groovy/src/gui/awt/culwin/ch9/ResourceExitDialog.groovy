@@ -22,7 +22,7 @@ class ResourceExitDialog extends Dialog implements ActionListener {
         this.setFont(parent.getFont())
         this.setBackground(parent.getBackground())
 
-        resources = ResourceBundle.getBundle("ExitDialogResources")
+        resources = ResourceBundle.getBundle("gui.awt.culwin.ch9.ExitDialogResources", Locale.US)
 
         messageCanvas = new MessageCanvas(resources.getObject("exitDialogQuestion") as String)
         messageCanvas.setBackground(Color.WHITE)
@@ -32,12 +32,12 @@ class ResourceExitDialog extends Dialog implements ActionListener {
 
         yesButton = new Button(resources.getObject("exitDialogYes") as String)
         yesButton.setActionCommand("yes")
-        yesButton.addActionListener(this)
+        yesButton.addActionListener(myListener)
         buttonPanel.add(yesButton)
 
         noButton = new Button(resources.getObject("exitDialogNo") as String)
         noButton.setActionCommand("no")
-        noButton.addActionListener(this)
+        noButton.addActionListener(myListener)
         buttonPanel.add(noButton)
 
         this.setTitle(resources.getObject("exitDialogTitle") as String)
