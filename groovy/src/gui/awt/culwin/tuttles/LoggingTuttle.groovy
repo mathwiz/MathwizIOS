@@ -25,7 +25,7 @@ class LoggingTuttle extends BufferedTuttle {
     }
 
     void startLogging() {
-        TimeStamp theTime = new TimeStamp(true).toString()
+        TimeStamp theTime = new TimeStamp(true)
         String filename = "tlog"
         filename += TimeStamp.pad(theTime.hours)
         filename += TimeStamp.pad(theTime.minutes)
@@ -38,12 +38,14 @@ class LoggingTuttle extends BufferedTuttle {
             System.err.println("Log file could not be opened. Logging to terminal.")
             logFile = new PrintWriter(System.out, true)
         }
+        println "Logging started"
         loggingActive = true
     }
 
     void stopLogging() {
-        logCommand("Logging stopped.")
+        logCommand("Logging stopped")
         logFile.close()
+        println "Logging stopped"
         loggingActive = false
     }
 
@@ -106,11 +108,13 @@ class LoggingTuttle extends BufferedTuttle {
         }
 
         String toString() {
-            def theTime = "**:**:**"
+            def theTime = ""
             if (isValid()) {
                 theTime += pad(hours)
                 theTime += ":" + pad(minutes)
                 theTime += ":" + pad(seconds)
+            } else {
+                theTime = "**:**:**"
             }
             theTime
         }

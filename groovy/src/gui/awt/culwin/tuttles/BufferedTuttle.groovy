@@ -209,7 +209,6 @@ class BufferedTuttle extends TextTuttle {
         if (tokenizer.hasMoreTokens()) {
             String firstTerm = tokenizer.nextToken().toLowerCase()
             thisCommand = identifyCommand(firstTerm)
-            println "Identified command ${thisCommand}"
 
             if (thisCommand == UNDO) {
                 reply = undo()
