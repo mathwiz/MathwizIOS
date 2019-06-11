@@ -25,7 +25,11 @@ class LoggingTuttle extends BufferedTuttle {
     }
 
     class TimeStamp {
-        private int theStamp
+        private static final int SECONDS_PER_MIN = 60
+        private static final int SECONDS_PER_HOUR = SECONDS_PER_MIN * 60
+        private static final int INVALID_TIME = -1
+
+        private int theStamp = INVALID_TIME
 
         TimeStamp() {
             this.stamp()
@@ -37,12 +41,40 @@ class LoggingTuttle extends BufferedTuttle {
             }
         }
 
-        void stamp() {
+        synchronized void stamp() {
+            def now = new GregorianCalendar()
+            theStamp = now.get(GregorianCalendar.HOUR_OF_DAY) * SECONDS_PER_HOUR
+            theStamp += now.get(GregorianCalendar.MINUTE) * SECONDS_PER_MIN
+            theStamp += now.get(GregorianCalendar.SECOND)
+        }
 
+        int elapsed(TimeStamp other) {
+            if (other.theStamp == INVALID_TIME || this.theStamp == INVALID_TIME) {
+                return INVALID_TIME
+            } else {
+                return other.theStamp - this.theStamp
+            }
+        }
+
+        boolean isValid() {
+            theStamp != INVALID_TIME
         }
 
         String toString() {
+            def theTime = "**:**:**"
+            if (isValid()) {
+                int hours = theStamp / SECONDS_PER_HOUR
+                int secs = theStamp % SECONDS_PER_MIN
+                int mins = (theStamp - hours*SECONDS_PER_HOUR) / SECONDS_PER_MIN
+                theTime += pad(hours)
+                theTime += ":" + pad(mins)
+                theTime += ":" + pad(secs)
+            }
+            theTime
+        }
 
+        String pad(int num) {
+            (num < 10 ? "0" : "") + num
         }
     }
 }
